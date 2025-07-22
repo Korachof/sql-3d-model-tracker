@@ -1,0 +1,10 @@
+-- =============================================
+-- File Name: create_indexes.sql
+-- Purpose: Adds indexes to improve query performance and efficiency
+-- Indexes Created:
+--   On foreign keys: model_id, tag_id
+--   On filter columns: print_date, license_type
+-- Usage:
+--   Run after creating base tables
+--   Supports optimized joins and WHERE conditions in views/procedures
+-- =============================================

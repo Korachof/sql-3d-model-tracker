@@ -1,0 +1,12 @@
+-- =============================================
+-- File Name: create_tables.sql
+-- Purpose: Defines core database tables for the 3D Model Tracker
+-- Tables Created:
+--   Models        - Metadata for printable 3D models
+--   Tags          - Categories or descriptors applied to models
+--   ModelTags     - Junction table linking Models and Tags
+--   PrintLog      - Records physical print job activity per model
+-- Notes:
+--   Includes primary keys, foreign keys, and recommended data types
+--   Intended to be run during initial schema setup
+-- =============================================
