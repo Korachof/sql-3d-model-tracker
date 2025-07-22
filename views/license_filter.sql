@@ -1,0 +1,9 @@
+-- =============================================
+-- View Name: license_filter
+-- Purpose: Filters models based on license type
+-- Usage: Used to identify models with commercial-safe or restricted licenses
+-- Columns Returned:
+--   model_id, model_name, license_type, source_url
+-- Notes:
+--   Modify WHERE clause to target specific license categories
+-- =============================================

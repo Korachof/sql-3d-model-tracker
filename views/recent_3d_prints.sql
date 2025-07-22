@@ -1,0 +1,9 @@
+-- =============================================
+-- View Name: recent_3d_prints
+-- Purpose: Displays 3D model print jobs from the last N days
+-- Usage: Used to audit recent activity or highlight recently fabricated models
+-- Columns Returned:
+--   model_id, model_name, print_date, material_used, print_status, duration_minutes
+-- Notes:
+--   Adjust date interval in WHERE clause as needed (e.g., last 7 or 30 days)
+-- =============================================
