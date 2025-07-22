@@ -1,0 +1,11 @@
+-- =============================================
+-- Procedure Name: add_model
+-- Purpose: Inserts a new 3D model into the Models table
+-- Usage: Called when importing or manually adding model metadata
+-- Parameters:
+--   @name              NVARCHAR(255)     -- Display name of the model
+--   @source_url        NVARCHAR(MAX)     -- Link to model source (e.g., Thingiverse)
+--   @license_type      NVARCHAR(100)     -- License classification (e.g., Creative Commons)
+--   @description       NVARCHAR(MAX)     -- Optional model notes or summary
+-- Returns: Newly inserted Model ID (INT)
+-- =============================================

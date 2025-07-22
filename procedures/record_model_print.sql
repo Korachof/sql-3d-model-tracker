@@ -1,0 +1,12 @@
+-- =============================================
+-- Procedure Name: record_model_print
+-- Purpose: Logs a 3d print job entry in the PrintLog table
+-- Usage: Called after a successful or failed 3D print event
+-- Parameters:
+--   @model_id          INT               -- Foreign key to Models table
+--   @material_used     NVARCHAR(100)     -- Material used (e.g., PLA, PETG)
+--   @print_status      NVARCHAR(50)      -- Outcome (e.g., Success, Failed)
+--   @print_date        DATE              -- Date of print job
+--   @duration_minutes  INT               -- Duration in minutes
+-- Returns: PrintLog entry ID (INT)
+-- =============================================
