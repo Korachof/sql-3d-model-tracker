@@ -14,7 +14,7 @@
 -- Models Table
 CREATE TABLE Models (
     model_id INT PRIMARY KEY IDENTITY(1,1),
-    name NVARCHAR(255) NOT NULL,
+    model_name NVARCHAR(255) NOT NULL,
     -- Use-case for source-url is to connect to existing models via API
     source_url NVARCHAR(MAX) NOT NULL,
     license_type NVARCHAR(100) NULL,
@@ -24,7 +24,7 @@ CREATE TABLE Models (
 -- Tags Table
 CREATE TABLE Tags (
     tag_id INT PRIMARY KEY IDENTITY(1,1),
-    name NVARCHAR(100) NOT NULL UNIQUE
+    tag_name NVARCHAR(100) NOT NULL UNIQUE
 );
 
 -- ModelTags Junction Table
