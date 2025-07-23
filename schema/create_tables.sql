@@ -20,3 +20,9 @@ CREATE TABLE Models (
     license_type NVARCHAR(100),
     description NVARCHAR(MAX)
 );
+
+-- Tags Table
+CREATE TABLE Tags (
+    tag_id INT PRIMARY KEY IDENTITY(1,1),
+    name NVARCHAR(100) NOT NULL UNIQUE
+);
