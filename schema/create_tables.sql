@@ -36,3 +36,15 @@ CREATE TABLE ModelTags (
     FOREIGN KEY (tag_id) REFERENCES Tags(tag_id)
 );
 
+-- PrintLog Table
+CREATE TABLE PrintLog (
+    print_id INT PRIMARY KEY IDENTITY(1,1),
+    model_id INT NOT NULL,
+    material_used NVARCHAR(100) NOT NULL,
+    print_status NVARCHAR(50) NOT NULL,
+    print_status_details NVARCHAR(MAX),
+    print_date DATE NOT NULL,
+    -- If duration is unknown or forgotten, set to -1 for a placeholder
+    duration_minutes INT NOT NULL,
+    FOREIGN KEY (model_id) REFERENCES Models(model_id)
+);
