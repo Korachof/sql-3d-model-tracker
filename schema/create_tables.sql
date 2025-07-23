@@ -10,3 +10,13 @@
 --   Includes primary keys, foreign keys, and recommended data types
 --   Intended to be run during initial schema setup
 -- =============================================
+
+-- Models Table
+CREATE TABLE Models (
+    model_id INT PRIMARY KEY IDENTITY(1,1),
+    name NVARCHAR(255) NOT NULL,
+    -- Use-case for source-url is to connect to existing models via API
+    source_url NVARCHAR(MAX) NOT NULL,
+    license_type NVARCHAR(100),
+    description NVARCHAR(MAX)
+);
