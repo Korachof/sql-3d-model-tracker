@@ -1,11 +1,13 @@
-# Project Roadmap
+# Project Roadmap – SQL 3D Model Tracker
 
 ## Phase 1: Core Schema & Functionality
 
 - [x] Scaffold folder and file structure
 - [x] Define core tables and views
+- [x] Finalize naming conventions and file headers
 - [ ] Implement stored procedures for model and print tracking
 - [ ] Build Thingiverse importer logic
+- [ ] Include tag parsing and assignment during import
 - [ ] Document procedure inputs and output formats
 
 ## Phase 2: Usability & Query Enhancements
