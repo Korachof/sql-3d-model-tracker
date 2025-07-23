@@ -17,8 +17,8 @@ CREATE TABLE Models (
     name NVARCHAR(255) NOT NULL,
     -- Use-case for source-url is to connect to existing models via API
     source_url NVARCHAR(MAX) NOT NULL,
-    license_type NVARCHAR(100),
-    description NVARCHAR(MAX)
+    license_type NVARCHAR(100) NULL,
+    model_description NVARCHAR(MAX) NULL
 );
 
 -- Tags Table
