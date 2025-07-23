@@ -26,3 +26,13 @@ CREATE TABLE Tags (
     tag_id INT PRIMARY KEY IDENTITY(1,1),
     name NVARCHAR(100) NOT NULL UNIQUE
 );
+
+-- ModelTags Junction Table
+CREATE TABLE ModelTags (
+    model_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    PRIMARY KEY (model_id, tag_id),
+    FOREIGN KEY (model_id) REFERENCES Models(model_id),
+    FOREIGN KEY (tag_id) REFERENCES Tags(tag_id)
+);
+
