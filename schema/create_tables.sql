@@ -1,3 +1,5 @@
+USE ThreeDModelTrackerDB;
+GO
 -- =============================================
 -- File Name: create_tables.sql
 -- Purpose: Defines core database tables for the 3D Model Tracker
@@ -10,6 +12,7 @@
 --   Includes primary keys, foreign keys, and recommended data types
 --   Intended to be run during initial schema setup
 -- =============================================
+
 
 -- Models Table
 CREATE TABLE Models (
