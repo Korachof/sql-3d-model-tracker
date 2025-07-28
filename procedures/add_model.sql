@@ -41,3 +41,24 @@ BEGIN
         RETURN -2;
     END
 
+    -- Add new rows into the table
+    INSERT INTO Models (
+        model_name,
+        source_url,
+        license_type,
+        model_description
+    )
+    
+    -- Provide new data for the new rows
+    VALUES (
+        @ModelName,
+        @SourceURL,
+        @LicenseType,
+        @ModelDescription
+    );
+
+    -- Return the newly added model's id
+    SELECT SCOPE_IDENTITY() AS NewModelID;
+
+END;
+GO
