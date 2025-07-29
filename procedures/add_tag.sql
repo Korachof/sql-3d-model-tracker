@@ -1,0 +1,8 @@
+-- =============================================
+-- Procedure Name: AddTag
+-- Purpose: Adds a new tag to the Tags table, or retrieves an existing tag's ID.
+-- Usage: Called to ensure a tag exists and to get its tag_id for linking.
+-- Parameters:
+--   @TagName        NVARCHAR(100)  -- The name of the tag to add or retrieve.
+-- Returns: The tag_id (INT) of the newly created or existing tag.
+-- =============================================
