@@ -18,6 +18,13 @@ BEGIN
 
     DECLARE @TagID INT;
 
+     -- Validate @TagName
+    IF @TagName IS NULL OR LTRIM(RTRIM(@TagName)) = ''
+    BEGIN
+        RAISERROR('Error: Tag name cannot be empty.', 16, 1);
+        RETURN -101; -- Consistent: Missing/Invalid Required String Input
+    END
+
     -- Check if the tag already exists
     SELECT @TagID = tag_id
     FROM Tags

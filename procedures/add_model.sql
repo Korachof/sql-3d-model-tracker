@@ -32,7 +32,7 @@ BEGIN
     IF @ModelName IS NULL OR LTRIM(RTRIM(@ModelName)) = ''
         BEGIN
             RAISERROR('Model name cannot be empty.', 16, 1);
-            RETURN -1; -- Set -1 for naming issue
+            RETURN -101; -- Set -1 for naming issue
         END
 
     IF @SourceURL IS NULL OR LTRIM(RTRIM(@SourceURL)) = ''
@@ -48,7 +48,7 @@ BEGIN
         license_type,
         model_description
     )
-    
+
     -- Provide new data for the new rows
     VALUES (
         @ModelName,

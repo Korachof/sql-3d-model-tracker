@@ -5,5 +5,6 @@
 -- Parameters:
 --   @model_id          INT               -- Foreign key to Models table
 --   @tag_id            INT               -- Foreign key to Tags table
--- Returns: Success flag or row count (optional)
+-- Returns: integer status code (0 for success, negative for failure)
 -- =============================================
+
