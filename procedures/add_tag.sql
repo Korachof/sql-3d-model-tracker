@@ -1,14 +1,22 @@
 -- =============================================
+-- Author: Chris Partin
 -- Procedure Name: add_tag
--- Purpose: Adds a new tag to the Tags table, or retrieves an existing tag's ID.
--- Usage: Called to ensure a tag exists and to get its tag_id for linking.
+-- Description: Adds a new tag to the Tags table, or retrieves an existing tag's ID.
+-- Outputs:     The ID of the new or existing tag.
 -- Parameters:
---   @TagName        NVARCHAR(100)  -- The name of the tag to add or retrieve.
--- Returns: The tag_id (INT) of the newly created or existing tag.
+--   @TagName   NVARCHAR(100)  -- The name of the tag to add or retrieve.
+--   @TagID     INT PRIMARY KEY
+-- Returns:
+--              0 = Success
+--              1 = Tag name was NULL/empty
+--              50000 = An unexpected error occurred
 -- =============================================
 
 CREATE OR ALTER PROCEDURE AddTag
+    -- Input paramenter for the tag's name
     @TagName NVARCHAR(100)
+    -- Output parameter to send the new/existing TagID back to the caller
+    @TagID INT OUTPUT
 AS
 BEGIN
 
@@ -16,13 +24,11 @@ BEGIN
    (Supress default back messages) */ 
     SET NOCOUNT ON;
 
-    DECLARE @TagID INT;
-
      -- Validate @TagName
     IF @TagName IS NULL OR LTRIM(RTRIM(@TagName)) = ''
     BEGIN
         RAISERROR('Error: Tag name cannot be empty.', 16, 1);
-        RETURN -101; -- Consistent: Missing/Invalid Required String Input
+        RETURN 1; -- Consistent: Missing/Invalid Required String Input
     END
 
     -- Check if the tag already exists
