@@ -32,14 +32,14 @@ BEGIN
     END
 
     -- Check if the tag already exists
-    SELECT @TagID = tag_id
-    FROM Tags
-    WHERE tag_name = @TagName;
+    SELECT @TagID = TagID
+    FROM dbo.Tags
+    WHERE TagName = @TagName;
 
     -- If tag does not exist, insert it
     IF @TagID IS NULL
     BEGIN
-        INSERT INTO Tags (tag_name)
+        INSERT INTO dbo.Tags (TagName)
         VALUES (@TagName);
 
         SELECT @TagID = SCOPE_IDENTITY(); -- Get the ID of the newly inserted tag
