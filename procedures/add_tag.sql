@@ -31,21 +31,28 @@ BEGIN
         RETURN 1; -- Consistent: Missing/Invalid Required String Input
     END
 
-    -- Check if the tag already exists
-    SELECT @TagID = TagID
-    FROM dbo.Tags
-    WHERE TagName = @TagName;
+    -- Begin transaction for data integrity
+    BEGIN TRY
+
+        -- Check if the tag already exists
+        SELECT @TagID = TagID
+        FROM dbo.Tags
+        WHERE TagName = @TagName;
 
     -- If tag does not exist, insert it
-    IF @TagID IS NULL
-    BEGIN
-        INSERT INTO dbo.Tags (TagName)
-        VALUES (@TagName);
+        IF @TagID IS NULL
+        BEGIN
+            INSERT INTO dbo.Tags (TagName)
+            VALUES (@TagName);
 
-        SELECT @TagID = SCOPE_IDENTITY(); -- Get the ID of the newly inserted tag
-    END
+            -- Get ID of new tag and set
+            SET @TagID = SCOPE_IDENTITY(); -- Get the ID of the newly inserted tag
+        END
 
-    -- Return the tag_id (either existing or newly created)
-    SELECT @TagID AS TagID;
+        -- Success!!!
+        RETURN 0;
+    
+    END TRY
+
 END;
 GO
