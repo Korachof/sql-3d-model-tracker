@@ -53,6 +53,15 @@ BEGIN
         RETURN 0;
     
     END TRY
+    -- Unexpected Error Occured: Catch
+    BEGIN CATCH
+        -- TODO: Use reusable error detail functions like ERROR_NUMBER, ERROR_MESSAGE, etc.
+        -- Definitely using garbage magic numbers here, but I'll refactor and change that soon
+        -- Set to a known invalid state, just to avoid a NULL error
+        SET @TagID = -1,
 
-END;
+        -- Return with unexpected error occurred
+        RETURN 50000
+    END CATCH
+END
 GO
