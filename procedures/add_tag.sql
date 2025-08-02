@@ -8,8 +8,9 @@
 --   @TagID     INT PRIMARY KEY
 -- Returns:
 --              0 = Success
---              1 = Tag name was NULL/empty
---              50000 = An unexpected error occurred
+--              1 = Validation Failed: Tag name was NULL/empty
+-- THROWS:      For unexpected failures/errors
+--  Sends the original, detailed error message from SQL server to calling app
 -- =============================================
 
 CREATE OR ALTER PROCEDURE AddTag
@@ -28,7 +29,7 @@ BEGIN
     IF @TagName IS NULL OR LTRIM(RTRIM(@TagName)) = ''
     BEGIN
         RAISERROR('Error: Tag name cannot be empty.', 16, 1);
-        RETURN 1; -- Consistent: Missing/Invalid Required String Input
+        RETURN 1; -- Missing/Invalid Required String Input
     END
 
     -- Begin transaction for data integrity
@@ -55,13 +56,8 @@ BEGIN
     END TRY
     -- Unexpected Error Occured: Catch
     BEGIN CATCH
-        -- TODO: Use reusable error detail functions like ERROR_NUMBER, ERROR_MESSAGE, etc.
-        -- Definitely using garbage magic numbers here, but I'll refactor and change that soon
-        -- Set to a known invalid state, just to avoid a NULL error
-        SET @TagID = -1,
-
-        -- Return with unexpected error occurred
-        RETURN 50000
+        -- Take original, detailed error and pass it up to calling app
+        THROW;
     END CATCH
 END
 GO
