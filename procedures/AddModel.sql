@@ -30,9 +30,9 @@ BEGIN
    (Supress default back messages) */ 
     SET NOCOUNT ON;
 
-    -- ===================================================================
-    -- 1. HANDLE PREDICTABLE OUTCOMES
-    -- ===================================================================
+-- ===================================================================
+-- 1. HANDLE PREDICTABLE OUTCOMES
+-- ===================================================================
     -- LTRIM(RTRIM) first removes all trailing spaces, then all leading spaces
     IF @ModelName IS NULL OR LTRIM(RTRIM(@ModelName)) = '' 
     OR @SourceURL IS NULL OR LTRIM(RTRIM(@SourceURL)) = ''
@@ -43,9 +43,9 @@ BEGIN
         RETURN 1;
     END
 
-    -- ===================================================================
-    -- 2. HANDLE THE MAIN OPERATION
-    -- ===================================================================
+-- ===================================================================
+-- 2. HANDLE THE MAIN OPERATION
+-- ===================================================================
     BEGIN TRY
         -- Insert a new model into the Models Table
 
@@ -73,9 +73,9 @@ BEGIN
     
     END TRY
 
-    -- ===================================================================
-    -- 3. HANDLE UNEXPECTED FAILURES
-    -- ===================================================================
+-- ===================================================================
+-- 3. HANDLE UNEXPECTED FAILURES
+-- ===================================================================
     BEGIN CATCH
         -- Take original, detailed error and pass it up to calling app
         THROW;
