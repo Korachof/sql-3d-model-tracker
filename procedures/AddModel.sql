@@ -20,7 +20,7 @@ CREATE OR ALTER PROCEDURE dbo.AddModel
     @ModelName NVARCHAR(255),
     @SourceURL NVARCHAR(MAX),
     @LicenseType NVARCHAR(100) = NULL, -- Optional parameter
-    @ModelDescription NVARCHAR(MAX) = NULL -- Optional parameter
+    @ModelDescription NVARCHAR(MAX) = NULL, -- Optional parameter
     @ModelID INT OUTPUT
 
 AS

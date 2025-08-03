@@ -16,7 +16,7 @@
 
 CREATE OR ALTER PROCEDURE dbo.AddTag
     -- Input paramenter for the tag's name
-    @TagName NVARCHAR(100)
+    @TagName NVARCHAR(100),
     -- Output parameter to send the new/existing TagID back to the caller
     @TagID INT OUTPUT
 AS
