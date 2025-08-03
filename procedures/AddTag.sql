@@ -11,7 +11,7 @@
 --              1 = Validation Failed: Tag name was NULL/empty
 --              --   Set TagID to NULL
 -- THROWS:      For unexpected failures/errors
---  Sends the original, detailed error message from SQL server to calling app
+--      Sends the original, detailed error message from SQL server to calling app
 -- =============================================
 
 CREATE OR ALTER PROCEDURE dbo.AddTag
