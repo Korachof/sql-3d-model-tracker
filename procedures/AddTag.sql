@@ -9,11 +9,12 @@
 -- Returns:
 --              0 = Success
 --              1 = Validation Failed: Tag name was NULL/empty
+--              --   Set TagID to NULL
 -- THROWS:      For unexpected failures/errors
 --  Sends the original, detailed error message from SQL server to calling app
 -- =============================================
 
-CREATE OR ALTER PROCEDURE AddTag
+CREATE OR ALTER PROCEDURE dbo.AddTag
     -- Input paramenter for the tag's name
     @TagName NVARCHAR(100)
     -- Output parameter to send the new/existing TagID back to the caller
@@ -28,8 +29,10 @@ BEGIN
      -- Validate @TagName
     IF @TagName IS NULL OR LTRIM(RTRIM(@TagName)) = ''
     BEGIN
-        RAISERROR('Error: Tag name cannot be empty.', 16, 1);
-        RETURN 1; -- Missing/Invalid Required String Input
+        -- Set output parameter to a known safe state before exiting
+        SET @ TagID = NULL;
+        -- Missing/Invalid Required String Input (Tag name is NULL/Empty)
+        RETURN 1; 
     END
 
     -- Begin transaction for data integrity
