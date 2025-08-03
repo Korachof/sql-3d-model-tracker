@@ -30,25 +30,22 @@ BEGIN
    (Supress default back messages) */ 
     SET NOCOUNT ON;
 
-    -- Validation/Error Handling for NOT NULL columns
-
+    -- ===================================================================
+    -- 1. HANDLE PREDICTABLE OUTCOMES
+    -- ===================================================================
     -- LTRIM(RTRIM) first removes all trailing spaces, then all leading spaces
-    IF @ModelName IS NULL OR LTRIM(RTRIM(@ModelName)) = ''
-        BEGIN
-            -- Set output parameter to a known safe state before exiting
-            SET @ModelID = NULL;
-            -- Missing/Invalid Required String Input (Model name is NULL/Empty)
-            RETURN 1;
-        END
-
-    IF @SourceURL IS NULL OR LTRIM(RTRIM(@SourceURL)) = ''
+    IF @ModelName IS NULL OR LTRIM(RTRIM(@ModelName)) = '' 
+    OR @SourceURL IS NULL OR LTRIM(RTRIM(@SourceURL)) = ''
     BEGIN
         -- Set output parameter to a known safe state before exiting
-            SET @ModelID = NULL;
-            -- Missing/Invalid Required String Input (Model name is NULL/Empty)
-            RETURN 1;
+        SET @ModelID = NULL;
+        -- Missing/Invalid Required String Input (Model name/Source URL is NULL/Empty)
+        RETURN 1;
     END
 
+    -- ===================================================================
+    -- 2. HANDLE THE MAIN OPERATION
+    -- ===================================================================
     BEGIN TRY
         -- Insert a new model into the Models Table
 
@@ -69,13 +66,16 @@ BEGIN
         );
 
         -- Get the new models ID  and set it to the Output Parameter
-        SET SCOPE_IDENTITY() AS NewModelID;
+        SET @ModelID = SCOPE_IDENTITY();
 
         -- Return 0 for success!
         RETURN 0;
     
     END TRY
-    -- Unexpected Error Occured: Catch
+
+    -- ===================================================================
+    -- 3. HANDLE UNEXPECTED FAILURES
+    -- ===================================================================
     BEGIN CATCH
         -- Take original, detailed error and pass it up to calling app
         THROW;

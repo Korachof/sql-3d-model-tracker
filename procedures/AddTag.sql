@@ -26,7 +26,9 @@ BEGIN
    (Supress default back messages) */ 
     SET NOCOUNT ON;
 
-     -- Validate @TagName
+    -- ===================================================================
+    -- 1. HANDLE PREDICTABLE OUTCOMES
+    -- ===================================================================
     IF @TagName IS NULL OR LTRIM(RTRIM(@TagName)) = ''
     BEGIN
         -- Set output parameter to a known safe state before exiting
@@ -35,7 +37,9 @@ BEGIN
         RETURN 1; 
     END
 
-    -- Begin transaction for data integrity
+    -- ===================================================================
+    -- 2. HANDLE THE MAIN OPERATION
+    -- ===================================================================
     BEGIN TRY
 
         -- Check if the tag already exists
@@ -49,13 +53,16 @@ BEGIN
             INSERT INTO dbo.Tags (TagName)
             VALUES (@TagName);
 
-            -- Get ID of new tag and set
-            SET @TagID = SCOPE_IDENTITY(); -- Get the ID of the newly inserted tag
+            -- Get the new tag's ID  and set it to the Output Parameter
+            SET @TagID = SCOPE_IDENTITY();
         END
 
         -- Success!!!
         RETURN 0;
-    
+
+    -- ===================================================================
+    -- 3. HANDLE UNEXPECTED FAILURES
+    -- ===================================================================
     END TRY
     -- Unexpected Error Occured: Catch
     BEGIN CATCH
