@@ -32,7 +32,7 @@ BEGIN
     IF @TagName IS NULL OR LTRIM(RTRIM(@TagName)) = ''
     BEGIN
         -- Set output parameter to a known safe state before exiting
-        SET @ TagID = NULL;
+        SET @TagID = NULL;
         -- Missing/Invalid Required String Input (Tag name is NULL/Empty)
         RETURN 1; 
     END
