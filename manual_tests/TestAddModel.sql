@@ -5,6 +5,7 @@ GO
 
 -- Declare a variable to hold the output value from the stored procedure.
 DECLARE @NewModelID INT;
+DECLARE @ReturnStatus INT;
 
 -- ==================================
 -- SUCCESSFUL TESTS
@@ -35,13 +36,19 @@ SELECT @NewModelID AS 'Newly Created Model ID';
 
 -- Test Case 3: Try to add a model with a missing (NULL) required name
 -- This will return a status code of 1 and will not throw a system error.
-DECLARE @ReturnStatus INT;
+
 EXEC @ReturnStatus = dbo.AddModel
     @ModelName = NULL,
     @SourceURL = N'http://badurl.com/model',
     @ModelID = @NewModelID OUTPUT;
 
 SELECT @ReturnStatus AS 'Return Status (1 means validation failed)';
+
+-- Test 4: Try to add a NULL tag name.
+-- Expected: Return Status = 1 (validation failure), Returned TagID = NULL
+EXEC @ReturnStatus = dbo.AddTag
+    @TagName = NULL,
+    @TagID = @NewTagID OUTPUT;
 
 -- ==================================
 -- FINAL VERIFICATION

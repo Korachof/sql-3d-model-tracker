@@ -41,6 +41,8 @@ BEGIN
 -- 2. HANDLE THE MAIN OPERATION
 -- ===================================================================
     BEGIN TRY
+        -- Set TagID to NULL to reset from previous add
+        SET @TagID = NULL;
 
         -- Check if the tag already exists
         SELECT @TagID = TagID
