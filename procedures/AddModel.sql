@@ -47,27 +47,37 @@ BEGIN
 -- 2. HANDLE THE MAIN OPERATION
 -- ===================================================================
     BEGIN TRY
-        -- Insert a new model into the Models Table
+        -- Initialize @ModelID to NULL to because SELECT
+        -- doesn't change the variable if no row is found.
+        SET @ModelID = NULL;
 
-        -- Add new rows into the table
-        INSERT INTO Models (
-            ModelName,
-            SourceURL,
-            LicenseType,
-            ModelDescription
-        )
+        -- Check if a model with this SourceURL already exists.
+        SELECT @ModelID = ModelID
+        FROM dbo.Models
+        WHERE SourceURL = @SourceURL;
 
-        -- Provide new data for the new rows
-        VALUES (
-            @ModelName,
-            @SourceURL,
-            @LicenseType,
-            @ModelDescription
-        );
+        -- If @ModelID is still NULL, the model does not exist, so insert it.
+        IF @ModelID IS NULL
+        BEGIN
+            -- Add new rows into the table
+            INSERT INTO dbo.Models (
+                ModelName,
+                SourceURL,
+                LicenseType,
+                ModelDescription
+            )
 
-        -- Get the new models ID  and set it to the Output Parameter
-        SET @ModelID = SCOPE_IDENTITY();
+            -- Provide new data for the new rows
+            VALUES (
+                @ModelName,
+                @SourceURL,
+                @LicenseType,
+                @ModelDescription
+            );
 
+            -- Get the new models ID  and set it to the Output Parameter
+            SET @ModelID = SCOPE_IDENTITY();
+        END
         -- Return 0 for success!
         RETURN 0;
     
