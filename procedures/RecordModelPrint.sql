@@ -22,6 +22,7 @@
 -- =============================================
 CREATE OR ALTER PROCEDURE dbo.RecordModelPrint
     -- Required Parameters
+    @RequestID UNIQUEIDENTIFIER,
     @ModelID INT,
     @MaterialUsed NVARCHAR(100),
     @PrintStatus NVARCHAR(50),
@@ -33,10 +34,16 @@ CREATE OR ALTER PROCEDURE dbo.RecordModelPrint
     @PrintID INT OUTPUT
 AS
 BEGIN
+
+/* Prevent unnecessary output and aid in performance
+   (Supress default back messages) */ 
     SET NOCOUNT ON;
 
-    -- 1. HANDLE PREDICTABLE OUTCOMES (Validation)
-    IF @ModelID IS NULL
+-- ===================================================================
+-- 1. HANDLE PREDICTABLE OUTCOMES
+-- ===================================================================
+    IF @RequestID is NULL
+        OR @ModelID IS NULL
         OR @MaterialUsed IS NULL OR LTRIM(RTRIM(@MaterialUsed)) = ''
         OR @PrintStatus IS NULL OR LTRIM(RTRIM(@PrintStatus)) = ''
         OR @PrintDate IS NULL
@@ -53,33 +60,53 @@ BEGIN
         RETURN 2; -- Foreign Key Violation
     END
 
-    -- 2. HANDLE THE MAIN OPERATION
+-- ===================================================================
+-- 2. HANDLE THE MAIN OPERATION
+-- ===================================================================
     BEGIN TRY
-        INSERT INTO dbo.PrintLog (
-            ModelID,
-            MaterialUsed,
-            PrintStatus,
-            PrintStatusDetails,
-            PrintDate,
-            DurationMinutes
-        )
-        VALUES (
-            @ModelID,
-            @MaterialUsed,
-            @PrintStatus,
-            @PrintStatusDetails,
-            @PrintDate,
-            @DurationMinutes
-        );
+        -- Initialize @PrintID to NULL to prevent bugs.
+        SET @PrintID = NULL;
 
-        -- Get the ID of the row we just inserted.
-        SET @PrintID = SCOPE_IDENTITY();
+        -- Check if a print log with this RequestID already exists.
+        SELECT @PrintID = PrintID
+        FROM dbo.PrintLog
+        WHERE RequestID = @RequestID;
+
+        -- If @PrintID is still NULL, the log does not exist, so insert it.
+        IF @PrintID IS NULL
+        BEGIN
+            INSERT INTO dbo.PrintLog (
+                RequestID,
+                ModelID,
+                MaterialUsed,
+                PrintStatus,
+                PrintStatusDetails,
+                PrintDate,
+                DurationMinutes
+            )
+            VALUES (
+                @RequestID,
+                @ModelID,
+                @MaterialUsed,
+                @PrintStatus,
+                @PrintStatusDetails,
+                @PrintDate,
+                @DurationMinutes
+            );
+
+            -- Get the ID of the row we just inserted.
+            SET @PrintID = SCOPE_IDENTITY();
+        END
 
         RETURN 0; -- Success
 
+-- ===================================================================
+-- 3. HANDLE UNEXPECTED FAILURES
+-- ===================================================================
     END TRY
+    -- Unexpected Error Occured: Catch
     BEGIN CATCH
-        -- Re-throws the original, detailed error to the calling application.
+        -- Take original, detailed error and pass it up to calling app
         THROW;
     END CATCH
 END
