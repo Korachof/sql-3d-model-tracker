@@ -18,7 +18,7 @@ CREATE TABLE dbo.Models (
     ModelID INT PRIMARY KEY IDENTITY(1,1),
     ModelName NVARCHAR(255) NOT NULL,
     -- Use-case for source-url is to connect to existing models via API
-    SourceURL NVARCHAR(MAX) NOT NULL UNIQUE,
+    SourceURL NVARCHAR(450) NOT NULL UNIQUE,
     LicenseType NVARCHAR(100) NULL,
     ModelDescription NVARCHAR(MAX) NULL
 );
@@ -29,7 +29,7 @@ GO
 -- ===================================================================
 CREATE TABLE dbo.Tags (
     TagID INT PRIMARY KEY IDENTITY(1,1),
-    TagName NVARCHAR(100) NOT NULL UNIQUE
+    TagName NVARCHAR(100) NOT NULL UNIQUE 
 );
 GO
 
@@ -41,8 +41,8 @@ CREATE TABLE dbo.ModelTags (
     ModelID INT NOT NULL,
     TagID INT NOT NULL,
     PRIMARY KEY (ModelID, TagID),
-    FOREIGN KEY (ModelID) REFERENCES dbo.Models(ModelID),
-    FOREIGN KEY (TagID) REFERENCES dbo.Tags(TagID)
+    FOREIGN KEY (ModelID) REFERENCES dbo.Models(ModelID) ON DELETE CASCADE,
+    FOREIGN KEY (TagID) REFERENCES dbo.Tags(TagID) ON DELETE CASCADE
 );
 GO
 
@@ -51,6 +51,7 @@ GO
 -- ===================================================================
 CREATE TABLE dbo.PrintLog (
     PrintID INT PRIMARY KEY IDENTITY(1,1),
+    RequestID UNIQUEIDENTIFIER NOT NULL UNIQUE,
     ModelID INT NOT NULL,
     MaterialUsed NVARCHAR(100) NOT NULL,
     PrintStatus NVARCHAR(50) NOT NULL,
@@ -58,6 +59,6 @@ CREATE TABLE dbo.PrintLog (
     PrintDate DATE NOT NULL,
     -- If duration is unknown or forgotten, set to -1 for a placeholder
     DurationMinutes INT NOT NULL,
-    FOREIGN KEY (ModelID) REFERENCES dbo.Models(ModelID)
+    FOREIGN KEY (ModelID) REFERENCES dbo.Models(ModelID) ON DELETE CASCADE
 );
 GO
