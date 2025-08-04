@@ -1,16 +1,17 @@
 -- =============================================
 -- Author:      Your Name
 -- Create date: 2025-08-04
--- Description: Logs a 3D print job entry in the PrintLog table 
--- Outputs:     The ID of the new or existing tag.
+-- Description: Logs a 3D print job. If a log for the same model and start
+--              time already exists, it returns the existing PrintID.
+-- Outputs:     The ID of the new or Model Print Record
 -- Parameters:
 --   @ModelID:            The ID of the model that was printed.
---   @MaterialUsed:       The material used for the print (e.g., PLA, PETG).
+--   @PrintStartDateTime: The precise date and time the print started.
+--   @PrintEndDateTime:   The precise date and time the print ended.
+--   @MaterialUsed:       The material used for the print.
 --   @PrintStatus:        The outcome of the print (e.g., Success, Failed).
---   @PrintDate:          The date the print job was run.
---   @DurationMinutes:    The duration of the print in minutes.
 --   @PrintStatusDetails: (Optional) Additional details about the print status.
---   @PrintID:            OUTPUT parameter. Contains the new PrintID on success.
+--   @PrintID:            OUTPUT parameter. Contains the new or existing PrintID.
 --
 -- RETURN CODES (for predictable outcomes):
 --   0: Success.
@@ -22,12 +23,11 @@
 -- =============================================
 CREATE OR ALTER PROCEDURE dbo.RecordModelPrint
     -- Required Parameters
-    @RequestID UNIQUEIDENTIFIER,
     @ModelID INT,
+    @PrintStartDateTime DATETIME2(0),
+    @PrintEndDateTime DATETIME2(0),
     @MaterialUsed NVARCHAR(100),
     @PrintStatus NVARCHAR(50),
-    @PrintDate DATE,
-    @DurationMinutes INT,
     -- Optional Parameter
     @PrintStatusDetails NVARCHAR(MAX) = NULL,
     -- Output Parameter
@@ -42,12 +42,11 @@ BEGIN
 -- ===================================================================
 -- 1. HANDLE PREDICTABLE OUTCOMES
 -- ===================================================================
-    IF @RequestID is NULL
-        OR @ModelID IS NULL
+    IF @ModelID IS NULL
+        OR @PrintStartDateTime IS NULL
+        OR @PrintEndDateTime IS NULL
         OR @MaterialUsed IS NULL OR LTRIM(RTRIM(@MaterialUsed)) = ''
         OR @PrintStatus IS NULL OR LTRIM(RTRIM(@PrintStatus)) = ''
-        OR @PrintDate IS NULL
-        OR @DurationMinutes IS NULL
     BEGIN
         SET @PrintID = NULL;
         RETURN 1; -- Validation Failed
@@ -67,31 +66,30 @@ BEGIN
         -- Initialize @PrintID to NULL to prevent bugs.
         SET @PrintID = NULL;
 
-        -- Check if a print log with this RequestID already exists.
+        -- Check if a print log with this ModelID and StartDateTime already exists.
         SELECT @PrintID = PrintID
         FROM dbo.PrintLog
-        WHERE RequestID = @RequestID;
+        WHERE ModelID = @ModelID
+          AND PrintStartDateTime = @PrintStartDateTime;
 
         -- If @PrintID is still NULL, the log does not exist, so insert it.
         IF @PrintID IS NULL
         BEGIN
             INSERT INTO dbo.PrintLog (
-                RequestID,
                 ModelID,
+                PrintStartDateTime,
+                PrintEndDateTime,
                 MaterialUsed,
                 PrintStatus,
-                PrintStatusDetails,
-                PrintDate,
-                DurationMinutes
+                PrintStatusDetails
             )
             VALUES (
-                @RequestID,
                 @ModelID,
+                @PrintStartDateTime,
+                @PrintEndDateTime,
                 @MaterialUsed,
                 @PrintStatus,
-                @PrintStatusDetails,
-                @PrintDate,
-                @DurationMinutes
+                @PrintStatusDetails
             );
 
             -- Get the ID of the row we just inserted.

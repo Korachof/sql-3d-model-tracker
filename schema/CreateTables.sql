@@ -51,14 +51,14 @@ GO
 -- ===================================================================
 CREATE TABLE dbo.PrintLog (
     PrintID INT PRIMARY KEY IDENTITY(1,1),
-    RequestID UNIQUEIDENTIFIER NOT NULL UNIQUE,
     ModelID INT NOT NULL,
+    PrintStartDateTime DATETIME2(0) NOT NULL,
+    PrintEndDateTime DATETIME2(0) NOT NULL,
     MaterialUsed NVARCHAR(100) NOT NULL,
     PrintStatus NVARCHAR(50) NOT NULL,
-    PrintStatusDetails NVARCHAR(MAX),
-    PrintDate DATE NOT NULL,
-    -- If duration is unknown or forgotten, set to -1 for a placeholder
-    DurationMinutes INT NOT NULL,
-    FOREIGN KEY (ModelID) REFERENCES dbo.Models(ModelID) ON DELETE CASCADE
+    PrintStatusDetails NVARCHAR(MAX) NULL,
+    FOREIGN KEY (ModelID) REFERENCES dbo.Models(ModelID) ON DELETE CASCADE,
+    -- Composite UNIQUE constraint to prevent logical duplicates.
+    CONSTRAINT UQ_PrintLog_Model_Start UNIQUE (ModelID, PrintStartDateTime)
 );
 GO
