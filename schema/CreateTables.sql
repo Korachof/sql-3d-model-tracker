@@ -18,7 +18,7 @@ CREATE TABLE dbo.Models (
     ModelID INT PRIMARY KEY IDENTITY(1,1),
     ModelName NVARCHAR(255) NOT NULL,
     -- Use-case for source-url is to connect to existing models via API
-    SourceURL NVARCHAR(MAX) NOT NULL,
+    SourceURL NVARCHAR(MAX) NOT NULL UNIQUE,
     LicenseType NVARCHAR(100) NULL,
     ModelDescription NVARCHAR(MAX) NULL
 );
