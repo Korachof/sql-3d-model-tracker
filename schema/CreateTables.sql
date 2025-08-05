@@ -67,12 +67,14 @@ GO
 CREATE TABLE dbo.PrintLog (
     PrintID INT PRIMARY KEY IDENTITY(1,1),
     ModelID INT NOT NULL,
+    PrinterID INT NOT NULL,
     PrintStartDateTime DATETIME2(0) NOT NULL,
     PrintEndDateTime DATETIME2(0) NOT NULL,
     MaterialUsed NVARCHAR(100) NOT NULL,
     PrintStatus NVARCHAR(50) NOT NULL,
     PrintStatusDetails NVARCHAR(MAX) NULL,
     FOREIGN KEY (ModelID) REFERENCES dbo.Models(ModelID) ON DELETE CASCADE,
+    FOREIGN KEY (PrinterID) REFERENCES dbo.Printers(PrinterID) ON DELETE CASCADE,
     -- Composite UNIQUE constraint to prevent logical duplicates.
     CONSTRAINT UQ_PrintLog_Model_Start UNIQUE (ModelID, PrintStartDateTime)
 );

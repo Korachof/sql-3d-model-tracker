@@ -6,6 +6,7 @@
 -- Outputs:     The ID of the new or Model Print Record
 -- Parameters:
 --   @ModelID:            The ID of the model that was printed.
+--   @PrinterID:          The ID of the printer used for the print.
 --   @PrintStartDateTime: The precise date and time the print started.
 --   @PrintEndDateTime:   The precise date and time the print ended.
 --   @MaterialUsed:       The material used for the print.
@@ -17,6 +18,7 @@
 --   0: Success.
 --   1: Validation Failed. A required parameter was NULL or empty.
 --   2: Foreign Key Violation. The provided @ModelID does not exist in dbo.Models.
+--   3: Foreign Key Violation. The provided @PrinterID does not exist.
 --
 -- THROWS (for unexpected failures):
 --   This procedure will re-throw any unexpected system-level exception.
@@ -24,6 +26,7 @@
 CREATE OR ALTER PROCEDURE dbo.RecordModelPrint
     -- Required Parameters
     @ModelID INT,
+    @PrinterID INT,
     @PrintStartDateTime DATETIME2(0),
     @PrintEndDateTime DATETIME2(0),
     @MaterialUsed NVARCHAR(100),
@@ -59,6 +62,13 @@ BEGIN
         RETURN 2; -- Foreign Key Violation
     END
 
+    -- Check if the provided PrinterID actually exists in the Printers table
+    IF NOT EXISTS (SELECT 1 FROM dbo.Printers WHERE PrinterID = @PrinterID)
+    BEGIN
+        SET @PrintID = NULL;
+        RETURN 3; -- Foreign Key Violation for PrinterID
+    END
+
 -- ===================================================================
 -- 2. HANDLE THE MAIN OPERATION
 -- ===================================================================
@@ -77,6 +87,7 @@ BEGIN
         BEGIN
             INSERT INTO dbo.PrintLog (
                 ModelID,
+                PrinterID,
                 PrintStartDateTime,
                 PrintEndDateTime,
                 MaterialUsed,
@@ -85,6 +96,7 @@ BEGIN
             )
             VALUES (
                 @ModelID,
+                @PrinterID,
                 @PrintStartDateTime,
                 @PrintEndDateTime,
                 @MaterialUsed,
