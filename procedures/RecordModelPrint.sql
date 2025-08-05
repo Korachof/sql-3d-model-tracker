@@ -13,7 +13,7 @@
 --   @PrintStatusDetails: (Optional) Additional details about the print status.
 --   @PrintID:            OUTPUT parameter. Contains the new or existing PrintID.
 --
--- RETURN CODES (for predictable outcomes):
+-- Returns:
 --   0: Success.
 --   1: Validation Failed. A required parameter was NULL or empty.
 --   2: Foreign Key Violation. The provided @ModelID does not exist in dbo.Models.
