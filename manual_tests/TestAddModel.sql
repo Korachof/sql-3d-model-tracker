@@ -1,7 +1,10 @@
 USE ThreeDModelsTrackerDB;
 GO
 
--- SUCCESSFUL TESTS
+-- First, ensure we have a clean slate.
+DELETE FROM dbo.Models;
+DBCC CHECKIDENT ('dbo.Models', RESEED, 0);
+GO
 
 -- Declare a variable to hold the output value from the stored procedure.
 DECLARE @NewModelID INT;

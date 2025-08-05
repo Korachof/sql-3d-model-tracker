@@ -1,6 +1,11 @@
 USE ThreeDModelsTrackerDB;
 GO
 
+-- First, ensure we have a clean slate.
+DELETE FROM dbo.Tags;
+DBCC CHECKIDENT ('dbo.Tags', RESEED, 0);
+GO
+
 -- Declare variables to hold the output and return values from the procedure.
 DECLARE @NewTagID INT;
 DECLARE @ReturnStatus INT;
