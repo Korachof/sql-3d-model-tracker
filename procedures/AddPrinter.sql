@@ -77,6 +77,10 @@ BEGIN
         RETURN 0; -- Success
 
     END TRY
+    
+-- ===================================================================
+-- 3. HANDLE UNEXPECTED FAILURES
+-- ===================================================================
     BEGIN CATCH
         -- Take original, detailed error and pass it up to calling app
         THROW;

@@ -62,11 +62,11 @@ BEGIN
         -- Success!!!
         RETURN 0;
 
+    END TRY
+
 -- ===================================================================
 -- 3. HANDLE UNEXPECTED FAILURES
 -- ===================================================================
-    END TRY
-    -- Unexpected Error Occured: Catch
     BEGIN CATCH
         -- Take original, detailed error and pass it up to calling app
         THROW;
