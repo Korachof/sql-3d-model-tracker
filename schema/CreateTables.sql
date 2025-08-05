@@ -1,4 +1,5 @@
 -- =============================================
+-- Author: Chris Partin
 -- File Name: create_tables.sql
 -- Purpose: Defines core database tables for the 3D Model Tracker
 -- Tables Created:
@@ -62,7 +63,7 @@ CREATE TABLE dbo.ModelTags (
 GO
 
 -- ===================================================================
--- 5. PrintLog Junction Table (Stores a record of each time a model is printed)
+-- 5. PrintLog Table (Stores a record of each time a model is printed)
 -- ===================================================================
 CREATE TABLE dbo.PrintLog (
     PrintID INT PRIMARY KEY IDENTITY(1,1),

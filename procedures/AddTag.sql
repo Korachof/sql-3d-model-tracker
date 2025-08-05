@@ -1,6 +1,6 @@
 -- =============================================
 -- Author: Chris Partin
--- Procedure Name: add_tag
+-- Procedure Name: AddTag
 -- Description: Adds a new tag to the Tags table, or retrieves an existing tag's ID.
 -- Outputs:     The ID of the new or existing tag.
 -- Parameters:

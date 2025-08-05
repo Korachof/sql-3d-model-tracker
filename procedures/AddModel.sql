@@ -1,7 +1,8 @@
 -- =============================================
+-- Author: Chris Partin
 -- Procedure Name: add_model
--- Purpose: Inserts a new 3D model into the Models table
--- Usage: Called when importing or manually adding model metadata
+-- Description: Inserts a new 3D model into the Models table
+--              Called when importing or manually adding model metadata
 -- Outputs:     The ID of the new or existing model.
 -- Parameters:
 --   @name                  NVARCHAR(255)     -- Display name of the model

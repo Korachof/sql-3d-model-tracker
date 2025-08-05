@@ -1,10 +1,21 @@
 -- =============================================
--- Procedure Name: assign_tags
--- Purpose: Links one or more tags to a model in the ModelTags junction table
--- Usage: Called when categorizing models by characteristics or themes
+-- Author:      Chris Partin
+-- Procedure Name: AssignTagToModel
+-- Create date: 2025-08-05
+-- Description: Assigns a tag to a model by creating a record in the
+--              dbo.ModelTags junction table.
+-- Outputs:    
 -- Parameters:
---   @model_id          INT               -- Foreign key to Models table
---   @tag_id            INT               -- Foreign key to Tags table
--- Returns: integer status code (0 for success, negative for failure)
+--   @ModelID: The ID of the model to be tagged.
+--   @TagID:   The ID of the tag to assign.
+--
+-- RETURN CODES (for predictable outcomes):
+--   0: Success. The link was created or already existed.
+--   1: Validation Failed. A required ID was NULL.
+--   2: Foreign Key Violation. The provided @ModelID does not exist.
+--   3: Foreign Key Violation. The provided @TagID does not exist.
+--
+-- THROWS (for unexpected failures):
+--   This procedure will re-throw any unexpected system-level exception.
 -- =============================================
 

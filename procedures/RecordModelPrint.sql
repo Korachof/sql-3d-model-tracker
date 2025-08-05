@@ -1,5 +1,6 @@
 -- =============================================
--- Author:      Your Name
+-- Author:      Chris Partin
+--Procedure Name: RecordModelPrint
 -- Create date: 2025-08-04
 -- Description: Logs a 3D print job. If a log for the same model and start
 --              time already exists, it returns the existing PrintID.

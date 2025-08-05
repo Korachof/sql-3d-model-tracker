@@ -1,9 +1,9 @@
 -- =============================================
 -- Author:      Your Name
+-- Procedure Name: AddPrinter
 -- Create date: 2025-08-05
 -- Description: Inserts a new printer if one with the same brand and model
---              name does not already exist. Returns the ID of the new or
---              existing printer.
+--              name does not already exist. 
 -- Outputs:     The ID of the new or existing printer.
 -- Parameters:
 --   @PrinterBrand:       The brand of the printer (e.g., 'Elegoo', 'Bambu Lab').
@@ -77,7 +77,7 @@ BEGIN
         RETURN 0; -- Success
 
     END TRY
-    
+
 -- ===================================================================
 -- 3. HANDLE UNEXPECTED FAILURES
 -- ===================================================================
