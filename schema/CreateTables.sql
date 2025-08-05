@@ -47,8 +47,6 @@ CREATE TABLE dbo.Tags (
 );
 GO
 
-
-
 -- ===================================================================
 -- 4. ModelTags Junction Table 
 -- (Creates a many-to-many relationship between Models and Tags)
