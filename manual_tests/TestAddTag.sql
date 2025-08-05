@@ -1,4 +1,4 @@
-USE ThreeDModelTrackerDB;
+USE ThreeDModelsTrackerDB;
 GO
 
 -- Declare variables to hold the output and return values from the procedure.

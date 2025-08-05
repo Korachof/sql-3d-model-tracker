@@ -1,6 +1,6 @@
--- =============================================
--- Test Script for dbo.RecordModelPrint
--- =============================================
+USE ThreeDModelsTrackerDB;
+GO
+
 -- First, ensure we have a clean slate and a model to test with.
 DELETE FROM dbo.PrintLog;
 DELETE FROM dbo.Models;
