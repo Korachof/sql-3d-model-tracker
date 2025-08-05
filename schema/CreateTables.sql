@@ -25,7 +25,20 @@ CREATE TABLE dbo.Models (
 GO
 
 -- ===================================================================
--- 2. Tags Table (Stores unique tags that can be applied to models)
+-- 2. Printers Table (Stores unique Printers to print models)
+-- ===================================================================
+CREATE TABLE dbo.Printers (
+    PrinterID INT PRIMARY KEY IDENTITY(1,1),
+    PrinterBrand NVARCHAR(100) NOT NULL,
+    PrinterModelName NVARCHAR(100) NOT NULL,
+    PrinterMaterialType NVARCHAR(50) NOT NULL,
+    -- Composite UNIQUE constraint to prevent duplicate printer entries.
+    CONSTRAINT UQ_Printer_Brand_Model UNIQUE (PrinterBrand, PrinterModelName)
+);
+GO
+
+-- ===================================================================
+-- 3. Tags Table (Stores unique tags that can be applied to models)
 -- ===================================================================
 CREATE TABLE dbo.Tags (
     TagID INT PRIMARY KEY IDENTITY(1,1),
@@ -33,8 +46,10 @@ CREATE TABLE dbo.Tags (
 );
 GO
 
+
+
 -- ===================================================================
--- 3. ModelTags Junction Table 
+-- 4. ModelTags Junction Table 
 -- (Creates a many-to-many relationship between Models and Tags)
 -- ===================================================================
 CREATE TABLE dbo.ModelTags (
@@ -47,7 +62,7 @@ CREATE TABLE dbo.ModelTags (
 GO
 
 -- ===================================================================
--- 4. PrintLog Table (Stores a record of each time a model is printed)
+-- 5. PrintLog Junction Table (Stores a record of each time a model is printed)
 -- ===================================================================
 CREATE TABLE dbo.PrintLog (
     PrintID INT PRIMARY KEY IDENTITY(1,1),
