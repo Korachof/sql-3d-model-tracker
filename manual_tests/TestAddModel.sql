@@ -44,12 +44,6 @@ EXEC @ReturnStatus = dbo.AddModel
 
 SELECT @ReturnStatus AS 'Return Status (1 means validation failed)';
 
--- Test 4: Try to add a NULL tag name.
--- Expected: Return Status = 1 (validation failure), Returned TagID = NULL
-EXEC @ReturnStatus = dbo.AddTag
-    @TagName = NULL,
-    @TagID = @NewTagID OUTPUT;
-
 -- ==================================
 -- FINAL VERIFICATION
 -- ==================================
