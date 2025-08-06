@@ -17,7 +17,8 @@
 - [x] Read procedure for getting tags assigned to specific models
 - [x] Read procedure for printers
 - [x] Read procedure for tags
-- [ ] Read procedure for model print records/logs
+- [x] Read procedure for model print logs
+- [ ] Read procedure for getting print logs associated with a specific model
 - [ ] Read procedure for getting models by tag
 - [ ] Read procedure to get model details (model info, associated tags, past print logs involving that model)
 - [ ] Update procedure for models
