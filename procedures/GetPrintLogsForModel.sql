@@ -1,5 +1,5 @@
 -- =============================================
--- Author:      Chris Partin
+-- Author:      Your Name
 -- Create date: 2025-08-06
 -- Description: Retrieves the print history for a specific model, ordered
 --              with the most recent prints first.
@@ -34,14 +34,15 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM dbo.Models WHERE ModelID = @ModelID)
     BEGIN
         SELECT TOP (0) * FROM dbo.PrintLog;
-        RETURN 2; -- ModelID Not Found
+        RETURN 2; -- Not Found
     END
 
     -- 2. HANDLE THE MAIN OPERATION
     SELECT
         pl.PrintID,
         pl.PrinterID,
-        p.PrinterName, -- Joined to show the printer name
+        p.PrinterBrand,
+        p.PrinterModelName,
         pl.PrintStartDateTime,
         pl.PrintEndDateTime,
         pl.MaterialUsed,
