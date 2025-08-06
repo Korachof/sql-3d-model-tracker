@@ -46,7 +46,7 @@
 - [x] Test GetPrintLogs
 - [x] Test GetPrintLogsForModel
 - [x] Test for GetPrintLogsforPrinter
-- [ ] Test GetModelsByTag
+- [x] Test GetModelsByTag
 - [ ] Test GetModelDetails
 - [ ] Test UpdateModel
 - [ ] Test UpdatePrinter
