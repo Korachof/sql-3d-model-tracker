@@ -1,6 +1,9 @@
 -- =============================================
 -- Test Script for dbo.GetPrinters
 -- =============================================
+USE ThreeDModelsTrackerDB;
+GO
+
 -- First, ensure we have a clean slate.
 -- We must delete from PrintLog first due to the foreign key constraint.
 DELETE FROM dbo.PrintLog;

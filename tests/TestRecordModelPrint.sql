@@ -1,3 +1,6 @@
+-- =============================================
+-- Test Script for dbo.RecordModelPrint
+-- =============================================
 USE ThreeDModelsTrackerDB;
 GO
 

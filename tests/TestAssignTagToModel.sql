@@ -1,6 +1,9 @@
 -- =============================================
 -- Test Script for dbo.AssignTagToModel
 -- =============================================
+USE ThreeDModelsTrackerDB;
+GO
+
 -- First, ensure we have a clean slate and sample data to work with.
 DELETE FROM dbo.ModelTags;
 DELETE FROM dbo.PrintLog;

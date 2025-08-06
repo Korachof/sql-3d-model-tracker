@@ -1,3 +1,6 @@
+-- =============================================
+-- Test Script for dbo.AddPrinter
+-- =============================================
 USE ThreeDModelsTrackerDB;
 GO
 

@@ -1,3 +1,6 @@
+-- =============================================
+-- Test Script for dbo.AddModel
+-- =============================================
 USE ThreeDModelsTrackerDB;
 GO
 
