@@ -5,7 +5,9 @@
 - [x] Scaffold folder and file structure
 - [x] Define core tables and views
 - [x] Finalize naming conventions and file headers
-- [ ] Implement stored procedures for model and print tracking
+
+### [ ] Implement stored procedures for model and print tracking
+
 - [x] Add procedure for models
 - [x] Add procedure for printers
 - [x] Add procedure for tags
@@ -27,7 +29,9 @@
 - [ ] Delete procedure for printers
 - [ ] Delete procedure for print logs
 - [ ] Delete procedure to remove tags from models
-- [ ] Implement test queries for stored procedures and tables
+
+### [ ] Implement test queries for stored procedures and tables
+
 - [x] Test AddModel
 - [x] Test AddPrinter
 - [x] Test AddTag
@@ -49,6 +53,7 @@
 - [ ] Test DeletePrinter
 - [ ] Test DeletePrintLog
 - [ ] Test RemoveTagFromModel
+
 - [ ] Build Thingiverse importer logic
 - [ ] Include tag parsing and assignment during import
 - [ ] Document procedure inputs and output formats
