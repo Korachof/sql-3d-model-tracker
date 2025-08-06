@@ -15,6 +15,9 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
+-- ===================================================================
+-- 1. HANDLE THE MAIN OPERATION
+-- ===================================================================
     -- This procedure simply selects all data from the Models table.
     -- TODO: add parameters here for searching, sorting, and pagination.
     SELECT
