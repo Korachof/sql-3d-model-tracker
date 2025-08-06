@@ -15,8 +15,8 @@
 - [x] Junction procedure for adding tags to models
 - [x] Read procedure for models
 - [x] Read procedure for getting tags assigned to specific models
-- [ ] Read procedure for printers
-- [ ] Read procedure for tags
+- [x] Read procedure for printers
+- [x] Read procedure for tags
 - [ ] Read procedure for model print records/logs
 - [ ] Read procedure for getting models by tag
 - [ ] Read procedure to get model details (model info, associated tags, past print logs involving that model)
@@ -39,7 +39,7 @@
 - [x] Test GetModels
 - [x] Test GetTagsForModel
 - [x] Test RecordModelPrint
-- [ ] Test GetPrinters
+- [x] Test GetPrinters
 - [ ] Test GetTags
 - [ ] Test GetPrintLogsForModel
 - [ ] Test GetModelsByTag
