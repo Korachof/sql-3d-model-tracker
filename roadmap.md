@@ -42,6 +42,7 @@
 - [x] Test RecordModelPrint
 - [x] Test GetPrinters
 - [x] Test GetTags
+- [x] Test GetPrintLogs
 - [ ] Test GetPrintLogsForModel
 - [ ] Test GetModelsByTag
 - [ ] Test GetModelDetails
