@@ -20,7 +20,7 @@
 - [x] Read procedure for model print logs
 - [x] Read procedure for getting print logs associated with a specific model
 - [x] Read procedure for getting print logs associated with a specific printer
-- [ ] Read procedure for getting models by tag
+- [x] Read procedure for getting models by tag
 - [ ] Read procedure to get model details (model info, associated tags, past print logs involving that model)
 - [ ] Update procedure for models
 - [ ] Update procedure for printers
@@ -45,7 +45,7 @@
 - [x] Test GetTags
 - [x] Test GetPrintLogs
 - [x] Test GetPrintLogsForModel
-- [ ] Test for GetPrintLogsforPrinter
+- [x] Test for GetPrintLogsforPrinter
 - [ ] Test GetModelsByTag
 - [ ] Test GetModelDetails
 - [ ] Test UpdateModel
