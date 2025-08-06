@@ -6,6 +6,49 @@
 - [x] Define core tables and views
 - [x] Finalize naming conventions and file headers
 - [ ] Implement stored procedures for model and print tracking
+- [x] Add procedure for models
+- [x] Add procedure for printers
+- [x] Add procedure for tags
+- [x] Add procedure for model print records
+- [x] Junction procedure for adding tags to models
+- [x] Read procedure for models
+- [x] Read procedure for getting tags assigned to specific models
+- [ ] Read procedure for printers
+- [ ] Read procedure for tags
+- [ ] Read procedure for model print records/logs
+- [ ] Read procedure for getting models by tag
+- [ ] Read procedure to get model details (model info, associated tags, past print logs involving that model)
+- [ ] Update procedure for models
+- [ ] Update procedure for printers
+- [ ] Update procedure for tags
+- [ ] Update procedure for print logs
+- [ ] Delete procedure for models
+- [ ] Delete procedure for tags
+- [ ] Delete procedure for printers
+- [ ] Delete procedure for print logs
+- [ ] Delete procedure to remove tags from models
+- [ ] Implement test queries for stored procedures and tables
+- [x] Test AddModel
+- [x] Test AddPrinter
+- [x] Test AddTag
+- [x] Test AssignTagToModel
+- [x] Test GetModels
+- [x] Test GetTagsForModel
+- [x] Test RecordModelPrint
+- [ ] Test GetPrinters
+- [ ] Test GetTags
+- [ ] Test GetPrintLogsForModel
+- [ ] Test GetModelsByTag
+- [ ] Test GetModelDetails
+- [ ] Test UpdateModel
+- [ ] Test UpdatePrinter
+- [ ] Test UpdateTag
+- [ ] Test UpdatePrintLog
+- [ ] Test DeleteModel
+- [ ] Test DeleteTag
+- [ ] Test DeletePrinter
+- [ ] Test DeletePrintLog
+- [ ] Test RemoveTagFromModel
 - [ ] Build Thingiverse importer logic
 - [ ] Include tag parsing and assignment during import
 - [ ] Document procedure inputs and output formats
