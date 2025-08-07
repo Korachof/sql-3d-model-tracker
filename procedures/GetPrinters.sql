@@ -15,6 +15,9 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
+-- ===================================================================
+-- 1. HANDLE THE MAIN OPERATION
+-- ===================================================================
     -- Selects all data from the Printers table.
     -- The results are ordered by Brand, then by Model Name for a predictable sort.
     SELECT

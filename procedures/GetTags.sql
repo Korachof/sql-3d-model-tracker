@@ -15,6 +15,9 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
+-- ===================================================================
+-- 1. HANDLE PREDICTABLE OUTCOMES
+-- ===================================================================
     -- Selects all data from the Tags table, ordered alphabetically.
     SELECT
         TagID,

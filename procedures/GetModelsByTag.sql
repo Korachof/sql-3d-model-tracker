@@ -21,7 +21,9 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- 1. HANDLE PREDICTABLE OUTCOMES (Validation)
+-- ===================================================================
+-- 1. HANDLE PREDICTABLE OUTCOMES
+-- ===================================================================
     IF @TagID IS NULL
     BEGIN
         -- Return an empty result set with the correct structure
@@ -36,7 +38,9 @@ BEGIN
         RETURN 2; -- Not Found
     END
 
-    -- 2. HANDLE THE MAIN OPERATION
+-- ===================================================================
+-- 2. HANDLE THE MAIN OPERATION
+-- ===================================================================
     SELECT
         m.ModelID,
         m.ModelName,
