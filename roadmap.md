@@ -25,7 +25,7 @@
 - [x] Update procedure for models
 - [x] Update procedure for printers
 - [x] Update procedure for tags
-- [ ] Update procedure for print logs
+- [x] Update procedure for print logs
 - [ ] Delete procedure for models
 - [ ] Delete procedure for tags
 - [ ] Delete procedure for printers
