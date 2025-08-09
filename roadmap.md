@@ -27,7 +27,7 @@
 - [x] Update procedure for tags
 - [x] Update procedure for print logs
 - [x] Delete procedure for models
-- [ ] Delete procedure for tags
+- [x] Delete procedure for tags
 - [ ] Delete procedure for printers
 - [ ] Delete procedure for print logs
 - [ ] Delete procedure to remove tags from models
@@ -53,7 +53,7 @@
 - [x] Test UpdateTag
 - [x] Test UpdatePrintLog
 - [x] Test DeleteModel
-- [ ] Test DeleteTag
+- [x] Test DeleteTag
 - [ ] Test DeletePrinter
 - [ ] Test DeletePrintLog
 - [ ] Test RemoveTagFromModel
