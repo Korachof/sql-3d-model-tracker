@@ -23,7 +23,7 @@
 - [x] Read procedure for getting models by tag
 - [x] Read procedure to get model details (model info, associated tags, past print logs involving that model)
 - [x] Update procedure for models
-- [ ] Update procedure for printers
+- [x] Update procedure for printers
 - [ ] Update procedure for tags
 - [ ] Update procedure for print logs
 - [ ] Delete procedure for models
@@ -48,7 +48,7 @@
 - [x] Test for GetPrintLogsforPrinter
 - [x] Test GetModelsByTag
 - [x] Test GetModelDetails
-- [ ] Test UpdateModel
+- [x] Test UpdateModel
 - [ ] Test UpdatePrinter
 - [ ] Test UpdateTag
 - [ ] Test UpdatePrintLog
