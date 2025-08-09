@@ -51,7 +51,7 @@
 - [x] Test UpdateModel
 - [x] Test UpdatePrinter
 - [x] Test UpdateTag
-- [ ] Test UpdatePrintLog
+- [x] Test UpdatePrintLog
 - [ ] Test DeleteModel
 - [ ] Test DeleteTag
 - [ ] Test DeletePrinter
