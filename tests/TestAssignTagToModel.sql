@@ -25,7 +25,7 @@ EXEC dbo.AddTag @TagName = N'Calibration', @TagID = @TagID_Cal OUTPUT;
 EXEC dbo.AddTag @TagName = N'Boat', @TagID = @TagID_Boat OUTPUT;
 
 ---
-PRINT '--- TEST 1: Assign a new tag to a model ---';
+-- TEST 1: Assign a new tag to a model
 -- Expected: Return Status = 0
 EXEC @ReturnStatus = dbo.AssignTagToModel
     @ModelID = @ModelID_Benchy,
@@ -33,7 +33,7 @@ EXEC @ReturnStatus = dbo.AssignTagToModel
 SELECT @ReturnStatus AS 'Return Status';
 
 ---
-PRINT '--- TEST 2: Assign another new tag to the same model ---';
+-- TEST 2: Assign another new tag to the same model
 -- Expected: Return Status = 0
 EXEC @ReturnStatus = dbo.AssignTagToModel
     @ModelID = @ModelID_Benchy,
@@ -41,7 +41,7 @@ EXEC @ReturnStatus = dbo.AssignTagToModel
 SELECT @ReturnStatus AS 'Return Status';
 
 ---
-PRINT '--- TEST 3: Try to assign an existing tag again (duplicate) ---';
+-- TEST 3: Try to assign an existing tag again (duplicate)
 -- Expected: Return Status = 0
 EXEC @ReturnStatus = dbo.AssignTagToModel
     @ModelID = @ModelID_Benchy,
@@ -49,7 +49,7 @@ EXEC @ReturnStatus = dbo.AssignTagToModel
 SELECT @ReturnStatus AS 'Return Status';
 
 ---
-PRINT '--- TEST 4: Foreign Key Violation (ModelID does not exist) ---';
+-- TEST 4: Foreign Key Violation (ModelID does not exist)
 -- Expected: Return Status = 2
 EXEC @ReturnStatus = dbo.AssignTagToModel
     @ModelID = 999, -- This ID does not exist
@@ -57,7 +57,7 @@ EXEC @ReturnStatus = dbo.AssignTagToModel
 SELECT @ReturnStatus AS 'Return Status (2 is FK violation)';
 
 ---
-PRINT '--- TEST 5: Foreign Key Violation (TagID does not exist) ---';
+-- TEST 5: Foreign Key Violation (TagID does not exist)
 -- Expected: Return Status = 3
 EXEC @ReturnStatus = dbo.AssignTagToModel
     @ModelID = @ModelID_Benchy,
@@ -65,7 +65,7 @@ EXEC @ReturnStatus = dbo.AssignTagToModel
 SELECT @ReturnStatus AS 'Return Status (3 is FK violation)';
 
 ---
-PRINT '--- FINAL VERIFICATION: View all model-tag links ---';
+-- FINAL VERIFICATION: View all model-tag links
 -- Expected: Two rows linking the 'Benchy' model to two different tags.
 SELECT
     m.ModelName,

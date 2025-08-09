@@ -16,7 +16,7 @@ DECLARE @PrinterID_1 INT, @PrinterID_2 INT, @PrinterID_3 INT;
 DECLARE @ReturnStatus INT;
 
 -- Insert a few sample printers out of alphabetical order
-PRINT '--- Inserting test printers... ---';
+-- Inserting test printers... 
 EXEC @ReturnStatus = dbo.AddPrinter @PrinterBrand = N'Elegoo', @PrinterModelName = N'Mars 4 Ultra', @PrinterMaterialType = N'Resin', @PrinterID = @PrinterID_1 OUTPUT;
 EXEC @ReturnStatus = dbo.AddPrinter @PrinterBrand = N'Prusa', @PrinterModelName = N'MK4', @PrinterMaterialType = N'Filament', @PrinterID = @PrinterID_2 OUTPUT;
 EXEC @ReturnStatus = dbo.AddPrinter @PrinterBrand = N'Bambu Lab', @PrinterModelName = N'P1S', @PrinterMaterialType = N'Filament', @PrinterID = @PrinterID_3 OUTPUT;
@@ -26,7 +26,7 @@ SELECT * FROM dbo.Printers;
 GO
 
 ---
-PRINT '--- EXECUTING dbo.GetPrinters ---';
+-- EXECUTING dbo.GetPrinters
 -- Expected: A result set with the 3 printers listed above, sorted alphabetically
 -- first by PrinterBrand, then by PrinterModelName.
 EXEC dbo.GetPrinters;

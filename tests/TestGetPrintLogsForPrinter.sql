@@ -26,15 +26,11 @@ EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_Mars, 
 EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_P1S, @PrintStartDateTime='2025-08-02 14:00:00', @PrintEndDateTime='2025-08-02 15:30:00', @MaterialUsed=N'PLA', @PrintStatus=N'Failed', @PrintID=@PrintID OUTPUT;
 EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_P1S, @PrintStartDateTime='2025-08-03 09:00:00', @PrintEndDateTime='2025-08-03 09:20:00', @MaterialUsed=N'PETG', @PrintStatus=N'Success', @PrintID=@PrintID OUTPUT;
 
----
-PRINT
 -- TEST 1: Get print logs for a printer with a history (P1S)
 -- Expected: A result set with 2 print logs for the 'P1S' and Return Status = 0
 EXEC @ReturnStatus = dbo.GetPrintLogsForPrinter @PrinterID = @PrinterID_P1S;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT
 -- TEST 2: Get print logs for a printer with no history
 -- First, add a printer with no logs
 DECLARE @PrinterID_NoLogs INT;
@@ -43,15 +39,11 @@ EXEC dbo.AddPrinter @PrinterBrand = N'Anycubic', @PrinterModelName = N'Kobra', @
 EXEC @ReturnStatus = dbo.GetPrintLogsForPrinter @PrinterID = @PrinterID_NoLogs;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT
 -- TEST 3: Not Found (PrinterID does not exist)
 -- Expected: An empty result set and Return Status = 2
 EXEC @ReturnStatus = dbo.GetPrintLogsForPrinter @PrinterID = 999; -- This ID does not exist
 SELECT @ReturnStatus AS 'Return Status (2 is Not Found)';
 
----
-PRINT
 -- TEST 4: Validation Failure (NULL PrinterID)
 -- Expected: An empty result set and Return Status = 1
 EXEC @ReturnStatus = dbo.GetPrintLogsForPrinter @PrinterID = NULL;

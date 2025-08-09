@@ -16,7 +16,7 @@ DECLARE @TagID_1 INT, @TagID_2 INT, @TagID_3 INT;
 DECLARE @ReturnStatus INT;
 
 -- Insert a few sample tags out of alphabetical order
-PRINT '--- Inserting test tags... ---';
+-- Inserting test tags...
 EXEC @ReturnStatus = dbo.AddTag @TagName = N'Sci-Fi', @TagID = @TagID_1 OUTPUT;
 EXEC @ReturnStatus = dbo.AddTag @TagName = N'Articulated', @TagID = @TagID_2 OUTPUT;
 EXEC @ReturnStatus = dbo.AddTag @TagName = N'Mechanical', @TagID = @TagID_3 OUTPUT;
@@ -25,8 +25,8 @@ EXEC @ReturnStatus = dbo.AddTag @TagName = N'Mechanical', @TagID = @TagID_3 OUTP
 SELECT * FROM dbo.Tags;
 GO
 
----
-PRINT '--- EXECUTING dbo.GetTags ---';
+
+-- EXECUTING dbo.GetTags
 -- Expected: A result set with the 3 tags listed above, sorted alphabetically by TagName.
 EXEC dbo.GetTags;
 GO

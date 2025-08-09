@@ -13,7 +13,7 @@ DECLARE @ModelID_1 INT, @ModelID_2 INT;
 DECLARE @ReturnStatus INT;
 
 -- Insert two sample models to work with
-PRINT
+
 -- Inserting initial test models... 
 EXEC dbo.AddModel @ModelName = N'Benchy', @SourceURL = N'http://a.com', @ModelID = @ModelID_1 OUTPUT;
 EXEC dbo.AddModel @ModelName = N'Calibration Cube', @SourceURL = N'http://b.com', @ModelID = @ModelID_2 OUTPUT;
@@ -25,8 +25,7 @@ GO
 DECLARE @ModelID_1 INT = 1, @ModelID_2 INT = 2; -- Manually set IDs based on fresh seed
 DECLARE @ReturnStatus INT;
 
----
-PRINT
+
 -- TEST 1: Successful Update 
 -- Expected: Return Status = 0. 'Benchy' model is updated.
 EXEC @ReturnStatus = dbo.UpdateModel
@@ -37,8 +36,6 @@ EXEC @ReturnStatus = dbo.UpdateModel
     @ModelDescription = N'An updated description.';
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT
 -- TEST 2: Not Found (ModelID does not exist)
 -- Expected: Return Status = 2.
 EXEC @ReturnStatus = dbo.UpdateModel
@@ -48,7 +45,7 @@ EXEC @ReturnStatus = dbo.UpdateModel
 SELECT @ReturnStatus AS 'Return Status (2 is Not Found)';
 
 ---
-PRINT
+
 -- TEST 3: Unique Constraint Violation
 -- Try to change the Cube's URL to the Benchy's updated URL.
 -- Expected: Return Status = 3.
@@ -58,8 +55,6 @@ EXEC @ReturnStatus = dbo.UpdateModel
     @SourceURL = N'http://a.com/updated'; -- This URL is now used by Benchy
 SELECT @ReturnStatus AS 'Return Status (3 is Unique Violation)';
 
----
-PRINT
 -- TEST 4: Validation Failure (NULL Name)
 -- Expected: Return Status = 1.
 EXEC @ReturnStatus = dbo.UpdateModel
@@ -68,8 +63,6 @@ EXEC @ReturnStatus = dbo.UpdateModel
     @SourceURL = N'http://a.com/updated';
 SELECT @ReturnStatus AS 'Return Status (1 is Validation Failure)';
 
----
-PRINT
 -- FINAL VERIFICATION: View all models
 -- Expected: One model updated, no other changes.
 SELECT * FROM dbo.Models;

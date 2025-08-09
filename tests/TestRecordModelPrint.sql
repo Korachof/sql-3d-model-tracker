@@ -46,7 +46,6 @@ EXEC @ReturnStatus = dbo.RecordModelPrint
 
 SELECT @ReturnStatus AS 'Return Status', @NewPrintID AS 'Returned PrintID';
 
----
 -- TEST 3: Validation Failure (NULL MaterialUsed)
 -- Expected: Return Status = 1.
 EXEC @ReturnStatus = dbo.RecordModelPrint

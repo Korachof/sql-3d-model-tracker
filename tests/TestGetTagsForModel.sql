@@ -32,23 +32,17 @@ EXEC dbo.AssignTagToModel @ModelID = @ModelID_Benchy, @TagID = @TagID_Test;
 EXEC dbo.AssignTagToModel @ModelID = @ModelID_Cube, @TagID = @TagID_Cal;
 EXEC dbo.AssignTagToModel @ModelID = @ModelID_Cube, @TagID = @TagID_Test;
 
----
-PRINT 
 -- TEST 1: Get tags for a model with multiple tags (Benchy) ---';
 -- Expected: A result set with 2 tags ('Boat' and 'Test Print') and Return Status = 0
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = @ModelID_Benchy;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT
 -- TEST 2: Get tags for another model with multiple tags
 -- including a shared tag with Benchy. (Calibration Cube) ---';
 -- Expected: A result set with 2 tags ('Calibration' and 'Test Print') and Return Status = 0
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = @ModelID_Cube;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT
 -- TEST 3: Get tags for a model that has no tags assigned ---';
 -- First, add a model with no tags
 DECLARE @ModelID_NoTags INT;
@@ -57,22 +51,16 @@ EXEC dbo.AddModel @ModelName = N'Empty Model', @SourceURL = N'http://c.com', @Mo
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = @ModelID_NoTags;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT
 -- TEST 4: Not Found (ModelID does not exist) ---';
 -- Expected: An empty result set and Return Status = 2
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = 999; -- This ID does not exist
 SELECT @ReturnStatus AS 'Return Status (2 is Not Found)';
 
----
-PRINT
 -- TEST 5: Validation Failure (NULL ModelID) ---';
 -- Expected: An empty result set and Return Status = 1
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = NULL;
 SELECT @ReturnStatus AS 'Return Status (1 is Validation Failure)';
 
----
-PRINT
 -- FINAL VERIFICATION: View all model-tag links ---';
 -- Expected: Four rows linking the models to their tags.
 SELECT

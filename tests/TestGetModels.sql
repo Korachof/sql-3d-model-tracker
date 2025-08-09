@@ -16,7 +16,7 @@ DECLARE @ModelID_1 INT, @ModelID_2 INT, @ModelID_3 INT;
 DECLARE @ReturnStatus INT;
 
 -- Insert a few sample models out of alphabetical order
-PRINT '--- Inserting test models... ---';
+-- Inserting test models... 
 -- Add first Model -- "Robot Arm
 EXEC @ReturnStatus = dbo.AddModel @ModelName = N'Robot Arm', @SourceURL = N'http://c.com', @ModelID = @ModelID_1 OUTPUT;
 -- Add Second Model -- "Benchy"
@@ -35,7 +35,7 @@ SELECT * FROM dbo.Models;
 GO
 
 ---
-PRINT '--- EXECUTING dbo.GetModels ---';
+-- EXECUTING dbo.GetModels
 -- Expected: A result set with the 3 models listed above, sorted alphabetically by ModelName.
 EXEC dbo.GetModels;
 GO

@@ -31,29 +31,21 @@ EXEC dbo.AddPrinter @PrinterBrand = N'Elegoo', @PrinterModelName = N'Mars 4', @P
 EXEC dbo.AssignTagToModel @ModelID = @ModelID_Benchy, @TagID = @TagID_Boat;
 EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_Mars, @PrintStartDateTime='2025-08-01 10:00:00', @PrintEndDateTime='2025-08-01 12:00:00', @MaterialUsed=N'Resin', @PrintStatus=N'Success', @PrintID=@PrintID OUTPUT;
 
----
-PRINT
 -- TEST 1: Get details for a model with tags and print history
 -- Expected: Three result sets (Model Details, Tags, Print History) and Return Status = 0
 EXEC @ReturnStatus = dbo.GetModelDetails @ModelID = @ModelID_Benchy;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT
 -- TEST 2: Get details for a model with no tags or history
 -- Expected: Three result sets (Model Details, empty Tags, empty Print History) and Return Status = 0
 EXEC @ReturnStatus = dbo.GetModelDetails @ModelID = @ModelID_Cube;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT
 -- TEST 3: Not Found (ModelID does not exist)
 -- Expected: Three empty result sets and Return Status = 2
 EXEC @ReturnStatus = dbo.GetModelDetails @ModelID = 999; -- This ID does not exist
 SELECT @ReturnStatus AS 'Return Status (2 is Not Found)';
 
----
-PRINT
 -- TEST 4: Validation Failure (NULL ModelID) ---';
 -- Expected: Three empty result sets and Return Status = 1
 EXEC @ReturnStatus = dbo.GetModelDetails @ModelID = NULL;

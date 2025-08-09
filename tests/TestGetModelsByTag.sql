@@ -33,19 +33,19 @@ EXEC dbo.AssignTagToModel @ModelID = @ModelID_Cube, @TagID = @TagID_Cal;
 EXEC dbo.AssignTagToModel @ModelID = @ModelID_Cube, @TagID = @TagID_Test;
 
 ---
-PRINT '--- TEST 1: Get models for a tag with multiple models (Test Print) ---';
+-- TEST 1: Get models for a tag with multiple models (Test Print)
 -- Expected: A result set with 2 models ('Benchy' and 'Calibration Cube') and Return Status = 0
 EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_Test;
 SELECT @ReturnStatus AS 'Return Status';
 
 ---
-PRINT '--- TEST 2: Get models for a tag with a single model (Boat) ---';
+-- TEST 2: Get models for a tag with a single model (Boat)
 -- Expected: A result set with 1 model ('Benchy') and Return Status = 0
 EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_Boat;
 SELECT @ReturnStatus AS 'Return Status';
 
 ---
-PRINT '--- TEST 3: Get models for a tag that exists but is not assigned ---';
+-- TEST 3: Get models for a tag that exists but is not assigned
 -- First, add a tag that isn't used
 DECLARE @TagID_Unused INT;
 EXEC dbo.AddTag @TagName = N'Unused Tag', @TagID = @TagID_Unused OUTPUT;
@@ -54,13 +54,13 @@ EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_Unused;
 SELECT @ReturnStatus AS 'Return Status';
 
 ---
-PRINT '--- TEST 4: Not Found (TagID does not exist) ---';
+-- TEST 4: Not Found (TagID does not exist)
 -- Expected: An empty result set and Return Status = 2
 EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = 999; -- This ID does not exist
 SELECT @ReturnStatus AS 'Return Status (2 is Not Found)';
 
 ---
-PRINT '--- TEST 5: Validation Failure (NULL TagID) ---';
+-- TEST 5: Validation Failure (NULL TagID)
 -- Expected: An empty result set and Return Status = 1
 EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = NULL;
 SELECT @ReturnStatus AS 'Return Status (1 is Validation Failure)';

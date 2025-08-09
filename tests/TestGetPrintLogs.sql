@@ -23,7 +23,7 @@ EXEC dbo.AddPrinter @PrinterBrand = N'Elegoo', @PrinterModelName = N'Mars 4', @P
 EXEC dbo.AddPrinter @PrinterBrand = N'Bambu Lab', @PrinterModelName = N'P1S', @PrinterMaterialType = N'Filament', @PrinterID = @PrinterID_P1S OUTPUT;
 
 -- Insert a few sample print logs out of chronological order
-PRINT '--- Inserting test print logs... ---';
+-- Inserting test print logs...
 -- Log 2 (The earliest print)
 EXEC @ReturnStatus = dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_Mars, @PrintStartDateTime='2025-08-01 10:00:00', @PrintEndDateTime='2025-08-01 12:00:00', @MaterialUsed=N'Resin', @PrintStatus=N'Success', @PrintID=@PrintID OUTPUT;
 -- Log 3 (The latest print)
@@ -36,7 +36,7 @@ SELECT * FROM dbo.PrintLog;
 GO
 
 ---
-PRINT '--- EXECUTING dbo.GetPrintLogs ---';
+-- EXECUTING dbo.GetPrintLogs
 -- Expected: A result set with the 3 print logs, sorted with the most recent start time first.
 -- The order should be: Cube, then Benchy (Resin), then Benchy (PETG).
 EXEC dbo.GetPrintLogs;
