@@ -29,8 +29,8 @@
 - [x] Delete procedure for models
 - [x] Delete procedure for tags
 - [x] Delete procedure for printers
-- [ ] Delete procedure for print logs
-- [ ] Delete procedure to remove tags from models
+- [x] Delete procedure for print logs
+- [x] Delete procedure to remove tags from models
 
 ### [ ] Implement test queries for stored procedures and tables
 
@@ -55,8 +55,8 @@
 - [x] Test DeleteModel
 - [x] Test DeleteTag
 - [x] Test DeletePrinter
-- [ ] Test DeletePrintLog
-- [ ] Test RemoveTagFromModel
+- [x] Test DeletePrintLog
+- [x] Test RemoveTagFromModel
 
 - [ ] Build Thingiverse importer logic
 - [ ] Include tag parsing and assignment during import
