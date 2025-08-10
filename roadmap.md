@@ -58,9 +58,10 @@
 - [x] Test DeletePrintLog
 - [x] Test RemoveTagFromModel
 
-- [ ] Build Thingiverse importer logic
-- [ ] Include tag parsing and assignment during import
-- [ ] Document procedure inputs and output formats
+- [x] Include tag parsing and assignment during import
+  - Completed from the Database side, need logic for client-side
+- [x] Document procedure inputs and output formats
+  - Detailed header blocks complete for each procedure
 
 ## Phase 2: Usability & Query Enhancements
 
@@ -73,6 +74,7 @@
 
 - [ ] Track user or print location metadata
 - [ ] Build lightweight UI or admin dashboard
+- [ ] Build Thingiverse importer logic
 - [ ] Export recent prints to JSON or CSV
 - [ ] Hook in other sources (e.g. Printables, Cults3D)
 - [ ] Integrate thumbnail imports for a visually rich UI
