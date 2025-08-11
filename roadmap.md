@@ -6,7 +6,7 @@
 - [x] Define core tables and views
 - [x] Finalize naming conventions and file headers
 
-### [ ] Implement stored procedures for model and print tracking
+### [x] Implement stored procedures for model and print tracking
 
 - [x] Add procedure for models
 - [x] Add procedure for printers
@@ -32,7 +32,7 @@
 - [x] Delete procedure for print logs
 - [x] Delete procedure to remove tags from models
 
-### [ ] Implement test queries for stored procedures and tables
+### [x] Implement test queries for stored procedures and tables
 
 - [x] Test AddModel
 - [x] Test AddPrinter
@@ -65,8 +65,24 @@
 
 ## Phase 2: Usability & Query Enhancements
 
+### [ ] Add sorting and pagination helpers
+
+- #### Models Table
+- [ ] Add optional parameter to SortBy - Specify which column to sort on
+- [ ] Add optional parameter to SortDirection - Specify direction (ASC vs DESC)
+- [ ] Add optionap parameter to retrieve specific page numbers
+- [ ] Add optional parameter to set the number of items displayed per page
+- [ ] Update Models ORDER BY clause with a case statement to alter sorting
+- [ ] Add OFFSET/FETCH to models to handle pagination via SQL server
+- [ ] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+
+- #### Tags Table
+
+- #### Printers Table
+
+- #### PrintLogs Table
+
 - [ ] Create additional views (e.g. print stats, tag filters)
-- [ ] Add sorting and pagination helpers
 - [ ] Implement licensing filter logic
 - [ ] Add indexing strategy and performance checks
 
