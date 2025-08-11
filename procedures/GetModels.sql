@@ -57,7 +57,7 @@ BEGIN
         FROM
             dbo.Models
         ORDER BY ' + @OrderByString + 
-        N'OFFSET (@PageNumber_Param - 1) * @PageSize_Param ROWS
+        N' OFFSET (@PageNumber_Param - 1) * @PageSize_Param ROWS
         FETCH NEXT @PageSize_Param ROWS ONLY;';
 
 -- ===================================================================
