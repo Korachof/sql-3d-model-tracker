@@ -2,6 +2,7 @@
 -- Author:      Chris Partin
 -- Create date: 2025-08-05
 -- Description: Retrieves a paginated and sorted list models.
+--              Uses Dynamic SQL
 --
 -- Parameters:
 --   @SortBy:        (Optional) The column to sort by. Default is 'ModelName'.
@@ -23,50 +24,50 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
--- ===================================================================
--- 1. HANDLE THE MAIN OPERATION
--- ===================================================================
-    -- This procedure simply selects all data from the Models table.
-    -- TODO: add parameters here for searching, sorting, and pagination.
-    SELECT
-        ModelID,
-        ModelName,
-        SourceURL,
-        LicenseType,
-        ModelDescription
-    FROM
-        dbo.Models
+    -- Declare variable for main query string
+    DECLARE @SQL NVARCHAR(MAX);
+    -- Declare variable for sort by parameters to prevent SQL injection
+    DECLARE @OrderByString NVARCHAR(200);
 
 -- ===================================================================
--- 2. HANDLE SORTING
+-- 1. HANDLE SORTING AND PREVENT SQL INJECTION
 -- ===================================================================
-    ORDER BY
-        -- Dynamic Sorting Logic
-        CASE WHEN @SortDirection = 'ASC' THEN
-            CASE @SortBy
-                WHEN 'ModelID' THEN CAST(ModelID AS NVARCHAR(MAX))
-                WHEN 'ModelName' THEN ModelName
-                WHEN 'LicenseType' THEN LicenseType
-                ELSE ModelName
-            END
-        END ASC,
-        CASE WHEN @SortDirection = 'DESC' THEN
-            CASE @SortBy
-                WHEN 'ModelID' THEN CAST(ModelID AS NVARCHAR(MAX))
-                WHEN 'ModelName' THEN ModelName
-                WHEN 'LicenseType' THEN LicenseType
-                ELSE ModelName
-            END
-        END DESC;
+    SET @OrderByString =
+        CASE @SortBy
+            WHEN 'ModelID' THEN 'ModelID'
+            WHEN 'ModelName' THEN 'ModelName'
+            WHEN 'LicenseType' THEN 'LicenseType'
+            ELSE 'ModelName' -- Default sort column
+        END 
+        +
+        CASE 
+            WHEN @SortDirection = 'DESC' THEN ' DESC' 
+            ELSE ' ASC' END;
 
 -- ===================================================================
--- 3. HANDLE PAGINATION
+-- 2. HANDLE MAIN OPERATION BY BUILDING DYNAMIC QUERY STRING
 -- ===================================================================
-    -- Determine the starting point of pagination.
-    -- If PageNumber = 3 and PageSize = 50, then we skip the first 2*50 (100) records
-    OFFSET (@PageNumber - 1) * @PageSize ROWS
-    -- After skipping, provide the next number via PageSize.
-    FETCH NEXT @PageSize ROWS ONLY;
+    SET @SQL = N'
+        SELECT
+            ModelID,
+            ModelName,
+            SourceURL,
+            LicenseType,
+            ModelDescription
+        FROM
+            dbo.Models
+        ORDER BY ' + @OrderByString + 
+        N'OFFSET (@PageNumber_Param - 1) * @PageSize_Param ROWS
+        FETCH NEXT @PageSize_Param ROWS ONLY;';
+
+-- ===================================================================
+-- 3. EXECUTE THE DYNAMIC QUERY
+-- ===================================================================
+    EXEC sp_executesql
+        @SQL,
+        N'@PageNumber_Param INT, @PageSize_Param INT',
+        @PageNumber_Param = @PageNumber,
+        @PageSize_Param = @PageSize;
 
 END
 GO
