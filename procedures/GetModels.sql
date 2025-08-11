@@ -1,7 +1,7 @@
 -- =============================================
 -- Author:      Chris Partin
 -- Create date: 2025-08-05
--- Description: Retrieves a list of all models from the dbo.Models table.
+-- Description: Retrieves a paginated and sorted list models.
 --
 -- Parameters:
 --   @SortBy:        (Optional) The column to sort by. Default is 'ModelName'.
@@ -36,24 +36,37 @@ BEGIN
         ModelDescription
     FROM
         dbo.Models
+
+-- ===================================================================
+-- 2. HANDLE SORTING
+-- ===================================================================
     ORDER BY
-    -- Dynamic Sorting Logic
-    CASE WHEN @SortDirection = 'ASC' THEN
-        CASE @SortBy
-            WHEN 'ModelID' THEN CAST(ModelID AS NVARCHAR(MAX))
-            WHEN 'ModelName' THEN ModelName
-            WHEN 'LicenseType' THEN LicenseType
-            ELSE ModelName
-        END
-    END ASC,
-    CASE WHEN @SortDirection = 'DESC' THEN
-        CASE @SortBy
-            WHEN 'ModelID' THEN CAST(ModelID AS NVARCHAR(MAX))
-            WHEN 'ModelName' THEN ModelName
-            WHEN 'LicenseType' THEN LicenseType
-            ELSE ModelName
-        END
-    END DESC;
+        -- Dynamic Sorting Logic
+        CASE WHEN @SortDirection = 'ASC' THEN
+            CASE @SortBy
+                WHEN 'ModelID' THEN CAST(ModelID AS NVARCHAR(MAX))
+                WHEN 'ModelName' THEN ModelName
+                WHEN 'LicenseType' THEN LicenseType
+                ELSE ModelName
+            END
+        END ASC,
+        CASE WHEN @SortDirection = 'DESC' THEN
+            CASE @SortBy
+                WHEN 'ModelID' THEN CAST(ModelID AS NVARCHAR(MAX))
+                WHEN 'ModelName' THEN ModelName
+                WHEN 'LicenseType' THEN LicenseType
+                ELSE ModelName
+            END
+        END DESC;
+
+-- ===================================================================
+-- 3. HANDLE PAGINATION
+-- ===================================================================
+    -- Determine the starting point of pagination.
+    -- If PageNumber = 3 and PageSize = 50, then we skip the first 2*50 (100) records
+    OFFSET (@PageNumber - 1) * @PageSize ROWS
+    -- After skipping, provide the next number via PageSize.
+    FETCH NEXT @PageSize ROWS ONLY;
 
 END
 GO
