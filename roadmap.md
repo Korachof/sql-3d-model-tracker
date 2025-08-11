@@ -68,11 +68,11 @@
 ### [ ] Add sorting and pagination helpers
 
 - #### Models Table
-- [ ] Add optional parameter to SortBy - Specify which column to sort on
-- [ ] Add optional parameter to SortDirection - Specify direction (ASC vs DESC)
-- [ ] Add optionap parameter to retrieve specific page numbers
-- [ ] Add optional parameter to set the number of items displayed per page
-- [ ] Update Models ORDER BY clause with a case statement to alter sorting
+- [x] Add optional parameter to SortBy - Specify which column to sort on
+- [x] Add optional parameter to SortDirection - Specify direction (ASC vs DESC)
+- [x] Add optionap parameter to retrieve specific page numbers
+- [x] Add optional parameter to set the number of items displayed per page
+- [x] Update Models ORDER BY clause with a case statement to alter sorting
 - [ ] Add OFFSET/FETCH to models to handle pagination via SQL server
 - [ ] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 

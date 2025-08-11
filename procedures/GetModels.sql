@@ -37,7 +37,24 @@ BEGIN
     FROM
         dbo.Models
     ORDER BY
-        ModelName ASC;
+        ORDER BY
+        -- Dynamic Sorting Logic
+        CASE WHEN @SortDirection = 'ASC' THEN
+            CASE @SortBy
+                WHEN 'ModelID' THEN CAST(ModelID AS NVARCHAR(MAX))
+                WHEN 'ModelName' THEN ModelName
+                WHEN 'LicenseType' THEN LicenseType
+                ELSE ModelName
+            END
+        END ASC,
+        CASE WHEN @SortDirection = 'DESC' THEN
+            CASE @SortBy
+                WHEN 'ModelID' THEN CAST(ModelID AS NVARCHAR(MAX))
+                WHEN 'ModelName' THEN ModelName
+                WHEN 'LicenseType' THEN LicenseType
+                ELSE ModelName
+            END
+        END DESC;
 
 END
 GO
