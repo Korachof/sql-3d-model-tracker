@@ -4,13 +4,21 @@
 -- Description: Retrieves a list of all models from the dbo.Models table.
 --
 -- Parameters:
---   None
+--   @SortBy:        (Optional) The column to sort by. Default is 'ModelName'.
+--   @SortDirection: (Optional) The sort direction ('ASC' or 'DESC'). Default is 'ASC'.
+--   @PageNumber:    (Optional) The page number to retrieve. Default is 1.
+--   @PageSize:      (Optional) The number of items per page. Default is 50. 
 --
 -- Returns:
 --   A result set containing all columns for all models.
 --
 -- =============================================
 CREATE OR ALTER PROCEDURE dbo.GetModels
+    -- Optional parameters
+    @SortBy NVARCHAR(100) = 'ModelName',
+    @SortDirection NVARCHAR(4) = 'ASC',
+    @PageNumber INT = 1,
+    @PageSize INT = 50
 AS
 BEGIN
     SET NOCOUNT ON;
