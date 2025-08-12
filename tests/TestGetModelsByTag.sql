@@ -1,9 +1,6 @@
 -- =============================================
--- Test Script for dbo.GetModelsByTag
+-- Test Script for dbo.GetModelsByTag (with Pagination)
 -- =============================================
-USE ThreeDModelsTrackerDB;
-GO
-
 -- First, ensure we have a clean slate and sample data to work with.
 DELETE FROM dbo.ModelTags;
 DELETE FROM dbo.Models;
@@ -13,55 +10,58 @@ DBCC CHECKIDENT ('dbo.Tags', RESEED, 0);
 GO
 
 -- Declare all variables for the entire test batch
-DECLARE @ModelID_Benchy INT, @ModelID_Cube INT;
-DECLARE @TagID_Cal INT, @TagID_Boat INT, @TagID_Test INT;
-DECLARE @ReturnStatus INT;
+DECLARE @ModelID INT, @TagID INT, @ReturnStatus INT;
 
--- Insert sample models and tags
-EXEC dbo.AddModel @ModelName = N'Benchy', @SourceURL = N'http://a.com', @ModelID = @ModelID_Benchy OUTPUT;
-EXEC dbo.AddModel @ModelName = N'Calibration Cube', @SourceURL = N'http://b.com', @ModelID = @ModelID_Cube OUTPUT;
-EXEC dbo.AddTag @TagName = N'Calibration', @TagID = @TagID_Cal OUTPUT;
-EXEC dbo.AddTag @TagName = N'Boat', @TagID = @TagID_Boat OUTPUT;
-EXEC dbo.AddTag @TagName = N'Test Print', @TagID = @TagID_Test OUTPUT;
+-- Insert 12 sample models
+EXEC dbo.AddModel @ModelName = N'Benchy', @SourceURL = N'http://a.com', @LicenseType = N'GPL', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Robot Arm', @SourceURL = N'http://b.com', @LicenseType = N'MIT', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Vase', @SourceURL = N'http://c.com', @LicenseType = N'CC BY-SA', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Calibration Cube', @SourceURL = N'http://d.com', @LicenseType = N'GPL', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Dragon', @SourceURL = N'http://e.com', @LicenseType = N'MIT', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Phone Stand', @SourceURL = N'http://f.com', @LicenseType = N'CC BY-NC', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Keychain', @SourceURL = N'http://g.com', @LicenseType = N'GPL', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Planter', @SourceURL = N'http://h.com', @LicenseType = N'CC BY-SA', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Gear', @SourceURL = N'http://i.com', @LicenseType = N'MIT', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Cookie Cutter', @SourceURL = N'http://j.com', @LicenseType = N'CC BY-NC', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Earbud Holder', @SourceURL = N'http://k.com', @LicenseType = N'GPL', @ModelID = @ModelID OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Cable Clip', @SourceURL = N'http://l.com', @LicenseType = N'CC BY-SA', @ModelID = @ModelID OUTPUT;
 
--- Assign some tags to the models
--- Benchy gets 'Boat' and 'Test Print'
--- Cube gets 'Calibration' and 'Test Print'
-EXEC dbo.AssignTagToModel @ModelID = @ModelID_Benchy, @TagID = @TagID_Boat;
-EXEC dbo.AssignTagToModel @ModelID = @ModelID_Benchy, @TagID = @TagID_Test;
-EXEC dbo.AssignTagToModel @ModelID = @ModelID_Cube, @TagID = @TagID_Cal;
-EXEC dbo.AssignTagToModel @ModelID = @ModelID_Cube, @TagID = @TagID_Test;
+-- Insert 3 sample tags
+DECLARE @TagID_GPL INT, @TagID_MIT INT, @TagID_CC INT;
+EXEC dbo.AddTag @TagName = N'GPL License', @TagID = @TagID_GPL OUTPUT;
+EXEC dbo.AddTag @TagName = N'MIT License', @TagID = @TagID_MIT OUTPUT;
+EXEC dbo.AddTag @TagName = N'Creative Commons', @TagID = @TagID_CC OUTPUT;
 
----
--- TEST 1: Get models for a tag with multiple models (Test Print)
--- Expected: A result set with 2 models ('Benchy' and 'Calibration Cube') and Return Status = 0
-EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_Test;
+-- Assign tags to models based on their license type for testing
+INSERT INTO dbo.ModelTags (ModelID, TagID)
+SELECT ModelID, @TagID_GPL FROM dbo.Models WHERE LicenseType = 'GPL';
+INSERT INTO dbo.ModelTags (ModelID, TagID)
+SELECT ModelID, @TagID_MIT FROM dbo.Models WHERE LicenseType = 'MIT';
+INSERT INTO dbo.ModelTags (ModelID, TagID)
+SELECT ModelID, @TagID_CC FROM dbo.Models WHERE LicenseType LIKE 'CC BY%';
+
+-- TEST 1: Get models for a tag (GPL License) with default sort/page
+-- Expected: 4 models with the GPL license, sorted by name.
+EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_GPL;
 SELECT @ReturnStatus AS 'Return Status';
 
----
--- TEST 2: Get models for a tag with a single model (Boat)
--- Expected: A result set with 1 model ('Benchy') and Return Status = 0
-EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_Boat;
+-- TEST 2: Sorting (Sort by ModelID DESC)
+-- Expected: The same 4 models, but sorted by ID from highest to lowest.
+EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_GPL, @SortBy = 'ModelID', @SortDirection = 'DESC';
 SELECT @ReturnStatus AS 'Return Status';
 
----
--- TEST 3: Get models for a tag that exists but is not assigned
--- First, add a tag that isn't used
-DECLARE @TagID_Unused INT;
-EXEC dbo.AddTag @TagName = N'Unused Tag', @TagID = @TagID_Unused OUTPUT;
--- Expected: An empty result set and Return Status = 0
-EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_Unused;
+-- TEST 3: Pagination (Get Page 2, Size 2)
+-- Expected: 2 models with the GPL license, sorted by name, showing the second page.
+EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = @TagID_GPL, @PageNumber = 2, @PageSize = 2;
 SELECT @ReturnStatus AS 'Return Status';
 
----
 -- TEST 4: Not Found (TagID does not exist)
--- Expected: An empty result set and Return Status = 2
-EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = 999; -- This ID does not exist
+-- Expected: An empty result set and Return Status = 2.
+EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = 999;
 SELECT @ReturnStatus AS 'Return Status (2 is Not Found)';
 
----
 -- TEST 5: Validation Failure (NULL TagID)
--- Expected: An empty result set and Return Status = 1
+-- Expected: An empty result set and Return Status = 1.
 EXEC @ReturnStatus = dbo.GetModelsByTag @TagID = NULL;
 SELECT @ReturnStatus AS 'Return Status (1 is Validation Failure)';
 GO

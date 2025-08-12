@@ -27,23 +27,19 @@ EXEC dbo.AddPrinter @PrinterBrand = N'LulzBot', @PrinterModelName = N'TAZ Workho
 EXEC dbo.AddPrinter @PrinterBrand = N'Zortrax', @PrinterModelName = N'M200 Plus', @PrinterMaterialType = N'Filament', @PrinterID = @PrinterID OUTPUT;
 EXEC dbo.AddPrinter @PrinterBrand = N'MakerBot', @PrinterModelName = N'Replicator+', @PrinterMaterialType = N'Filament', @PrinterID = @PrinterID OUTPUT;
 
----
-PRINT '--- TEST 1: Default Behavior (Sort by Brand ASC, Page 1, Size 50) ---';
+-- TEST 1: Default Behavior (Sort by Brand ASC, Page 1, Size 50)
 -- Expected: All 12 printers, sorted alphabetically by brand.
 EXEC dbo.GetPrinters;
 
----
-PRINT '--- TEST 2: Sorting (Sort by PrinterID DESC) ---';
+-- TEST 2: Sorting (Sort by PrinterID DESC)
 -- Expected: All 12 printers, sorted by ID from 12 down to 1.
 EXEC dbo.GetPrinters @SortBy = 'PrinterID', @SortDirection = 'DESC';
 
----
-PRINT '--- TEST 3: Pagination (Get Page 2, Size 5) ---';
+-- TEST 3: Pagination (Get Page 2, Size 5)
 -- Expected: 5 printers, sorted by brand, starting from 'Formlabs'.
 EXEC dbo.GetPrinters @PageNumber = 2, @PageSize = 5;
 
----
-PRINT '--- TEST 4: Sorting and Pagination Combined ---';
+-- TEST 4: Sorting and Pagination Combined
 -- Expected: 4 printers, sorted by MaterialType DESC, showing the first page.
 EXEC dbo.GetPrinters @SortBy = 'PrinterMaterialType', @SortDirection = 'DESC', @PageNumber = 1, @PageSize = 4;
 GO

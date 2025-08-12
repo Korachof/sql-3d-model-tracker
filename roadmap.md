@@ -97,10 +97,10 @@
 
 - #### Models by Tag Table
 
-  - [] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
-  - [] Update ModelsbyTag ORDER BY clause with a case statement to alter sorting
-  - [] Add pagination and filtering to ModelsByTag newly enhanced feature, including mocking a lot more data to test for filter purposes
-  - [] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
+  - [x] Update ModelsbyTag ORDER BY clause with a case statement to alter sorting
+  - [x] Add pagination and filtering to ModelsByTag newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### Tags for Model Table
 
