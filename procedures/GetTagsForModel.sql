@@ -48,10 +48,10 @@ BEGIN
 -- 2. HANDLE SORTING AND PREVENT SQL INJECTION
 -- ===================================================================
     DECLARE @SQL NVARCHAR(MAX);
-    DECLARE @OrderByClause NVARCHAR(200);
+    DECLARE @OrderByString NVARCHAR(200);
 
     -- Build the ORDER BY clause safely
-    SET @OrderByClause =
+    SET @OrderByString =
         CASE @SortBy
             WHEN 'TagID' THEN 't.TagID'
             WHEN 'TagName' THEN 't.TagName'
@@ -72,7 +72,7 @@ BEGIN
             dbo.ModelTags AS mt ON t.TagID = mt.TagID
         WHERE
             mt.ModelID = @ModelID_Param
-        ORDER BY ' + @OrderByClause +
+        ORDER BY ' + @OrderByString +
         N' OFFSET (@PageNumber_Param - 1) * @PageSize_Param ROWS
         FETCH NEXT @PageSize_Param ROWS ONLY;';
 
