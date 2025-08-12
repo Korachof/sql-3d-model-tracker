@@ -23,12 +23,12 @@ BEGIN
     SET NOCOUNT ON;
 
     DECLARE @SQL NVARCHAR(MAX);
-    DECLARE @OrderByClause NVARCHAR(200);
+    DECLARE @OrderByString NVARCHAR(200);
 
 -- ===================================================================
 -- 1. HANDLE SORTING AND PREVENT SQL INJECTION
 -- ===================================================================
-    SET @OrderByClause =
+    SET @OrderByString =
         CASE @SortBy
             WHEN 'PrintID' THEN 'PrintID'
             WHEN 'ModelID' THEN 'ModelID'
@@ -56,7 +56,7 @@ BEGIN
             PrintStatusDetails
         FROM
             dbo.PrintLog
-        ORDER BY' + @OrderByClause + 
+        ORDER BY ' + @OrderByString + 
         N' OFFSET (@PageNumber_Param - 1) * @PageSize_Param ROWS
         FETCH NEXT @PageSize_Param ROWS ONLY;';
 
