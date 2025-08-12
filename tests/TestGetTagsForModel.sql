@@ -42,32 +42,27 @@ EXEC dbo.AssignTagToModel @ModelID = @ModelID, @TagID = @TagID;
 EXEC dbo.AddTag @TagName = N'Cosplay', @TagID = @TagID OUTPUT;
 EXEC dbo.AssignTagToModel @ModelID = @ModelID, @TagID = @TagID;
 
----
-PRINT '--- TEST 1: Default Behavior (Sort by Name ASC, Page 1, Size 50) ---';
+-- TEST 1: Default Behavior (Sort by Name ASC, Page 1, Size 50)
 -- Expected: All 12 tags assigned to the model, sorted alphabetically by name.
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = @ModelID;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT '--- TEST 2: Sorting (Sort by TagID DESC) ---';
+-- TEST 2: Sorting (Sort by TagID DESC)
 -- Expected: All 12 tags, sorted by ID from 12 down to 1.
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = @ModelID, @SortBy = 'TagID', @SortDirection = 'DESC';
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT '--- TEST 3: Pagination (Get Page 2, Size 5) ---';
+-- TEST 3: Pagination (Get Page 2, Size 5)
 -- Expected: 5 tags, sorted by name, starting from 'Functional Print'.
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = @ModelID, @PageNumber = 2, @PageSize = 5;
 SELECT @ReturnStatus AS 'Return Status';
 
----
-PRINT '--- TEST 4: Not Found (ModelID does not exist) ---';
+-- TEST 4: Not Found (ModelID does not exist)
 -- Expected: An empty result set and Return Status = 2.
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = 999;
 SELECT @ReturnStatus AS 'Return Status (2 is Not Found)';
 
----
-PRINT '--- TEST 5: Validation Failure (NULL ModelID) ---';
+-- TEST 5: Validation Failure (NULL ModelID)
 -- Expected: An empty result set and Return Status = 1.
 EXEC @ReturnStatus = dbo.GetTagsForModel @ModelID = NULL;
 SELECT @ReturnStatus AS 'Return Status (1 is Validation Failure)';

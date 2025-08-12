@@ -26,23 +26,19 @@ EXEC dbo.AddTag @TagName = N'Toy', @TagID = @TagID OUTPUT;
 EXEC dbo.AddTag @TagName = N'Miniature', @TagID = @TagID OUTPUT;
 EXEC dbo.AddTag @TagName = N'Cosplay', @TagID = @TagID OUTPUT;
 
----
-PRINT '--- TEST 1: Default Behavior (Sort by Name ASC, Page 1, Size 50) ---';
+-- TEST 1: Default Behavior (Sort by Name ASC, Page 1, Size 50)
 -- Expected: All 12 tags, sorted alphabetically by name.
 EXEC dbo.GetTags;
 
----
-PRINT '--- TEST 2: Sorting (Sort by TagID DESC) ---';
+-- TEST 2: Sorting (Sort by TagID DESC)
 -- Expected: All 12 tags, sorted by ID from 12 down to 1.
 EXEC dbo.GetTags @SortBy = 'TagID', @SortDirection = 'DESC';
 
----
-PRINT '--- TEST 3: Pagination (Get Page 2, Size 5) ---';
+-- TEST 3: Pagination (Get Page 2, Size 5)
 -- Expected: 5 tags, sorted by name, starting from 'Gadget'.
 EXEC dbo.GetTags @PageNumber = 2, @PageSize = 5;
 
----
-PRINT '--- TEST 4: Sorting and Pagination Combined ---';
+-- TEST 4: Sorting and Pagination Combined
 -- Expected: 4 tags, sorted by TagID DESC, showing the third page.
 EXEC dbo.GetTags @SortBy = 'TagID', @SortDirection = 'DESC', @PageNumber = 3, @PageSize = 4;
 GO

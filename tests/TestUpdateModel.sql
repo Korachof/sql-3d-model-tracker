@@ -25,7 +25,6 @@ GO
 DECLARE @ModelID_1 INT = 1, @ModelID_2 INT = 2; -- Manually set IDs based on fresh seed
 DECLARE @ReturnStatus INT;
 
-
 -- TEST 1: Successful Update 
 -- Expected: Return Status = 0. 'Benchy' model is updated.
 EXEC @ReturnStatus = dbo.UpdateModel
@@ -43,8 +42,6 @@ EXEC @ReturnStatus = dbo.UpdateModel
     @ModelName = N'Ghost Model',
     @SourceURL = N'http://ghost.com';
 SELECT @ReturnStatus AS 'Return Status (2 is Not Found)';
-
----
 
 -- TEST 3: Unique Constraint Violation
 -- Try to change the Cube's URL to the Benchy's updated URL.

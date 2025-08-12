@@ -35,23 +35,20 @@ EXEC dbo.RecordModelPrint @ModelID=@ModelID, @PrinterID=@PrinterID, @PrintStartD
 EXEC dbo.RecordModelPrint @ModelID=@ModelID, @PrinterID=@PrinterID, @PrintStartDateTime='2025-11-15 20:00:00', @PrintEndDateTime='2025-11-15 22:00:00', @MaterialUsed=N'PETG', @PrintStatus=N'Success', @PrintID=@PrintID OUTPUT;
 EXEC dbo.RecordModelPrint @ModelID=@ModelID, @PrinterID=@PrinterID, @PrintStartDateTime='2025-12-20 21:00:00', @PrintEndDateTime='2025-12-20 23:00:00', @MaterialUsed=N'ABS', @PrintStatus=N'Success', @PrintID=@PrintID OUTPUT;
 
----
-PRINT '--- TEST 1: Default Behavior (Sort by StartDate DESC, Page 1, Size 50) ---';
+-- TEST 1: Default Behavior (Sort by StartDate DESC, Page 1, Size 50) ---';
 -- Expected: All 12 logs, sorted with the most recent start date first.
 EXEC dbo.GetPrintLogs;
 
----
-PRINT '--- TEST 2: Sorting (Sort by MaterialUsed ASC) ---';
+-- TEST 2: Sorting (Sort by MaterialUsed ASC)
 -- Expected: All 12 logs, sorted alphabetically by material.
 EXEC dbo.GetPrintLogs @SortBy = 'MaterialUsed', @SortDirection = 'ASC';
 
 ---
-PRINT '--- TEST 3: Pagination (Get Page 2, Size 5) ---';
+-- TEST 3: Pagination (Get Page 2, Size 5)
 -- Expected: 5 logs, sorted by start date DESC, starting from the June print.
 EXEC dbo.GetPrintLogs @PageNumber = 2, @PageSize = 5;
 
----
-PRINT '--- TEST 4: Sorting and Pagination Combined ---';
+-- TEST 4: Sorting and Pagination Combined
 -- Expected: 4 logs, sorted by PrintStatus ASC, showing the third page.
 EXEC dbo.GetPrintLogs @SortBy = 'PrintStatus', @SortDirection = 'ASC', @PageNumber = 3, @PageSize = 4;
 GO
