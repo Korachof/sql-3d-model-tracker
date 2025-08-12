@@ -68,24 +68,42 @@
 ### [ ] Add sorting and pagination helpers
 
 - #### Models Table
-- [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
-- [x] Update Models ORDER BY clause with a case statement to alter sorting
-- [x] Add pagination and filtering to Models via dynamic querying
-- [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+
+  - [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
+  - [x] Update Models ORDER BY clause with a case statement to alter sorting
+  - [x] Add pagination and filtering to Models via dynamic querying
+  - [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### Tags Table
-- [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
-- [x] Update Tags ORDER BY clause with a case statement to alter sorting
-- [x] Add pagination and filtering to Tags newly enhanced feature, including mocking a lot more data to test for filter purposes
-- [] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+
+  - [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
+  - [x] Update Tags ORDER BY clause with a case statement to alter sorting
+  - [x] Add pagination and filtering to Tags newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### Printers Table
-- [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
-- [x] Update Printers ORDER BY clause with a case statement to alter sorting
-- [x] Add pagination and filtering to Printers newly enhanced feature, including mocking a lot more data to test for filter purposes
-- [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+
+  - [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
+  - [x] Update Printers ORDER BY clause with a case statement to alter sorting
+  - [x] Add pagination and filtering to Printers newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### PrintLogs Table
+
+  - [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
+  - [x] Update PrintLogs ORDER BY clause with a case statement to alter sorting
+  - [x] Add pagination and filtering to PrintLogs newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+
+- #### Models by Tag Table
+
+- #### Tags for Model Table
+
+- #### Print Logs for Model Table
+
+- #### Print Logs for Printer Table
+
+- #### Model Details Table
 
 - [ ] Create additional views (e.g. print stats, tag filters)
 - [ ] Implement licensing filter logic
