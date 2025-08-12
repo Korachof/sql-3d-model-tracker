@@ -107,7 +107,7 @@
   - [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
   - [x] Update TagsForModel ORDER BY clause with a case statement to alter sorting
   - [x] Add pagination and filtering to TagsForModel newly enhanced feature, including mocking a lot more data to test for filter purposes
-  - [] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### Print Logs for Model Table
 
