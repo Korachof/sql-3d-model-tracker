@@ -85,6 +85,7 @@
 - [ ] Create additional views (e.g. print stats, tag filters)
 - [ ] Implement licensing filter logic
 - [ ] Add indexing strategy and performance checks
+- [ ] Fill out testing suites
 
 ## Stretch Goals
 
