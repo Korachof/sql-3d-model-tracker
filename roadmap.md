@@ -125,10 +125,10 @@
 
 - #### Model Details Table
 
-  - [] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
-  - [] Update ModelDetails ORDER BY clause with a case statement to alter sorting
-  - [] Add pagination and filtering to ModelDetails newly enhanced feature, including mocking a lot more data to test for filter purposes
-  - [] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
+  - [x] Update ModelDetails ORDER BY clause with a case statement to alter sorting
+  - [x] Add pagination and filtering to ModelDetails newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### Additional Features To Add
 - [ ] Create additional views (e.g. print stats, tag filters)
