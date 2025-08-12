@@ -73,10 +73,17 @@
 - [x] Add optionap parameter to retrieve specific page numbers
 - [x] Add optional parameter to set the number of items displayed per page
 - [x] Update Models ORDER BY clause with a case statement to alter sorting
-- [ ] Add OFFSET/FETCH to models to handle pagination via SQL server
-- [ ] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+- [x] Add pagination and filtering to Models via dynamic querying
+- [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### Tags Table
+- [x] Add optional parameter to SortBy - Specify which column to sort on
+- [x] Add optional parameter to SortDirection - Specify direction (ASC vs DESC)
+- [x] Add optionap parameter to retrieve specific page numbers
+- [x] Add optional parameter to set the number of items displayed per page
+- [x] Update Tags ORDER BY clause with a case statement to alter sorting
+- [x] Add pagination and filtering to Tags newly enhanced feature, including mocking a lot more data to test for filter purposes
+- [] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### Printers Table
 
