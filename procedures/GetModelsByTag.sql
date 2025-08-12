@@ -46,7 +46,7 @@ BEGIN
     END
 
 -- ===================================================================
--- 1. HANDLE SORTING AND PREVENT SQL INJECTION
+-- 2. HANDLE SORTING AND PREVENT SQL INJECTION
 -- ===================================================================
     DECLARE @SQL NVARCHAR(MAX);
     DECLARE @OrderByClause NVARCHAR(200);
@@ -62,7 +62,7 @@ BEGIN
         CASE WHEN @SortDirection = 'DESC' THEN ' DESC' ELSE ' ASC' END;
 
 -- ===================================================================
--- 2. HANDLE MAIN OPERATION BY BUILDING DYNAMIC QUERY STRING
+-- 3. HANDLE MAIN OPERATION BY BUILDING DYNAMIC QUERY STRING
 -- ===================================================================
     SET @SQL = N'
         SELECT
@@ -82,7 +82,7 @@ BEGIN
         FETCH NEXT @PageSize_Param ROWS ONLY;';
 
 -- ===================================================================
--- 3. EXECUTE THE DYNAMIC QUERY
+-- 4. EXECUTE THE DYNAMIC QUERY
 -- ===================================================================
     EXEC sp_executesql
         @SQL,
