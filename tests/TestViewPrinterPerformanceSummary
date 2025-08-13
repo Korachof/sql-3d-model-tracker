@@ -1,0 +1,41 @@
+-- =============================================
+-- Test Script for dbo.vw_PrinterPerformanceSummary
+-- =============================================
+-- First, ensure we have a clean slate and sample data.
+DELETE FROM dbo.PrintLog;
+DELETE FROM dbo.Printers;
+DELETE FROM dbo.Models;
+DBCC CHECKIDENT ('dbo.PrintLog', RESEED, 0);
+DBCC CHECKIDENT ('dbo.Printers', RESEED, 0);
+DBCC CHECKIDENT ('dbo.Models', RESEED, 0);
+GO
+
+-- Declare all variables for the entire test batch
+DECLARE @PrinterID_Mars INT, @PrinterID_P1S INT;
+DECLARE @ModelID_Benchy INT;
+DECLARE @PrintID INT;
+DECLARE @ReturnStatus INT;
+
+-- Insert sample printers and a model
+-- Inserting initial test data...
+EXEC dbo.AddPrinter @PrinterBrand = N'Elegoo', @PrinterModelName = N'Mars 4', @PrinterMaterialType = N'Resin', @PrinterID = @PrinterID_Mars OUTPUT;
+EXEC dbo.AddPrinter @PrinterBrand = N'Bambu Lab', @PrinterModelName = N'P1S', @PrinterMaterialType = N'Filament', @PrinterID = @PrinterID_P1S OUTPUT;
+EXEC dbo.AddModel @ModelName = N'Benchy', @SourceURL = N'http://a.com', @ModelID = @ModelID_Benchy OUTPUT;
+
+-- Log several prints for each printer to test the view's calculations
+-- 3 prints for the Mars (2 success, 1 failed)
+EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_Mars, @PrintStartDateTime='2025-08-01 10:00:00', @PrintEndDateTime='2025-08-01 12:00:00', @MaterialUsed=N'Resin', @PrintStatus=N'Success', @PrintID=@PrintID OUTPUT;
+EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_Mars, @PrintStartDateTime='2025-08-02 10:00:00', @PrintEndDateTime='2025-08-02 11:00:00', @MaterialUsed=N'Resin', @PrintStatus=N'Success', @PrintID=@PrintID OUTPUT;
+EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_Mars, @PrintStartDateTime='2025-08-03 10:00:00', @PrintEndDateTime='2025-08-03 13:00:00', @MaterialUsed=N'Resin', @PrintStatus=N'Failed', @PrintID=@PrintID OUTPUT;
+
+-- 2 prints for the P1S (1 success, 1 failed)
+EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_P1S, @PrintStartDateTime='2025-08-04 14:00:00', @PrintEndDateTime='2025-08-04 14:30:00', @MaterialUsed=N'PLA', @PrintStatus=N'Success', @PrintID=@PrintID OUTPUT;
+EXEC dbo.RecordModelPrint @ModelID=@ModelID_Benchy, @PrinterID=@PrinterID_P1S, @PrintStartDateTime='2025-08-05 14:00:00', @PrintEndDateTime='2025-08-05 15:30:00', @MaterialUsed=N'PLA', @PrintStatus=N'Failed', @PrintID=@PrintID OUTPUT;
+
+---
+-- QUERYING THE dbo.vw_PrinterPerformanceSummary VIEW
+-- Expected: Two rows, one for each printer, with correctly calculated stats.
+-- Mars: Total=3, Success=2, Failed=1, AvgDuration=120+60+180 / 3 = 120 mins
+-- P1S:  Total=2, Success=1, Failed=1, AvgDuration=30+90 / 2 = 60 mins
+SELECT * FROM dbo.vw_PrinterPerformanceSummary;
+GO
