@@ -1,0 +1,21 @@
+-- =============================================
+-- Author:      Chris Partin
+-- Create date: 2025-08-13
+-- Description: Creates a view that summarizes tag usage by counting how
+--              many models are associated with each tag.
+-- =============================================
+CREATE OR ALTER VIEW dbo.vw_TagUsageSummary
+AS
+SELECT
+    t.TagID, -- ADDED: To provide a unique identifier for each tag.
+    t.TagName,
+    -- Count the number of models linked to each tag
+    COUNT(mt.ModelID) AS ModelCount
+FROM
+    dbo.Tags AS t
+LEFT JOIN
+    dbo.ModelTags AS mt ON t.TagID = mt.TagID
+GROUP BY
+    t.TagID,
+    t.TagName;
+GO
