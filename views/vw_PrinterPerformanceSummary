@@ -1,0 +1,29 @@
+-- =============================================
+-- Author:      Chris Partin
+-- Create date: 2025-08-13
+-- Description: Creates a view that calculates and summarizes performance
+--              metrics for each printer in the database.
+-- =============================================
+CREATE OR ALTER VIEW dbo.vw_PrinterPerformanceSummary
+AS
+SELECT
+    p.PrinterID,
+    p.PrinterBrand,
+    p.PrinterModelName,
+    -- Count the total number of prints for this printer
+    COUNT(pl.PrintID) AS TotalPrints,
+    -- Count only the successful prints
+    SUM(CASE WHEN pl.PrintStatus = 'Success' THEN 1 ELSE 0 END) AS SuccessfulPrints,
+    -- Count only the failed prints
+    SUM(CASE WHEN pl.PrintStatus = 'Failed' THEN 1 ELSE 0 END) AS FailedPrints,
+    -- Calculate the average print duration in minutes
+    AVG(DATEDIFF(minute, pl.PrintStartDateTime, pl.PrintEndDateTime)) AS AverageDurationMinutes
+FROM
+    dbo.Printers AS p
+LEFT JOIN
+    dbo.PrintLog AS pl ON p.PrinterID = pl.PrinterID
+GROUP BY
+    p.PrinterID,
+    p.PrinterBrand,
+    p.PrinterModelName;
+GO
