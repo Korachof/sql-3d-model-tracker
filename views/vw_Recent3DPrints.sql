@@ -1,9 +1,24 @@
 -- =============================================
--- View Name: recent_3d_prints
--- Purpose: Displays 3D model print jobs from the last N days
--- Usage: Used to audit recent activity or highlight recently fabricated models
--- Columns Returned:
---   model_id, model_name, print_date, material_used, print_status, duration_minutes
--- Notes:
---   Adjust date interval in WHERE clause as needed (e.g., last 7 or 30 days)
+-- Author:      Chris Partin
+-- Create date: 2025-08-13
+-- Description: Creates a view that shows the 10 most recent print logs.
 -- =============================================
+CREATE OR ALTER VIEW dbo.vw_RecentPrints
+AS
+SELECT TOP (10)
+    pl.PrintID,
+    pl.ModelID, -- ADDED: To provide a unique identifier for the model.
+    m.ModelName,
+    p.PrinterBrand,
+    p.PrinterModelName,
+    pl.PrintStartDateTime,
+    pl.PrintStatus
+FROM
+    dbo.PrintLog AS pl
+JOIN
+    dbo.Models AS m ON pl.ModelID = m.ModelID
+JOIN
+    dbo.Printers AS p ON pl.PrinterID = p.PrinterID
+ORDER BY
+    pl.PrintStartDateTime DESC;
+GO
