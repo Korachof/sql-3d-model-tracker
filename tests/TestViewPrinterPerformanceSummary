@@ -1,6 +1,7 @@
 -- =============================================
 -- Test Script for dbo.vw_PrinterPerformanceSummary
 -- =============================================
+
 -- First, ensure we have a clean slate and sample data.
 DELETE FROM dbo.PrintLog;
 DELETE FROM dbo.Printers;
