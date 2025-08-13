@@ -65,7 +65,7 @@
 
 ## Phase 2: Usability & Query Enhancements
 
-### [ ] Add sorting and pagination helpers
+### [x] Add sorting and pagination helpers
 
 - #### Models Table
 
@@ -79,7 +79,7 @@
   - [x] Add optional parameters for Sortby, SortDirection, PageNumber, and PageSize
   - [x] Update Tags ORDER BY clause with a case statement to alter sorting
   - [x] Add pagination and filtering to Tags newly enhanced feature, including mocking a lot more data to test for filter purposes
-  - [] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
+  - [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
 - #### Printers Table
 
@@ -130,8 +130,17 @@
   - [x] Add pagination and filtering to ModelDetails newly enhanced feature, including mocking a lot more data to test for filter purposes
   - [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
+### [ ] Create additional views (e.g. print stats, tag filters)
+
+- #### Create the Views
+
+  - [x] Create view for printer performance summary
+  - [x] Create view for 10 most recent 3d prints
+  - [ ] Create view for Tag usage summary (how many models use the tag, etc)
+  - [ ] Create view for model performance summary
+  - [ ] Create view for Material usage summary
+
 - #### Additional Features To Add
-- [ ] Create additional views (e.g. print stats, tag filters)
 - [ ] Implement licensing filter logic
 - [ ] Add indexing strategy and performance checks
 - [ ] Fill out testing suites
