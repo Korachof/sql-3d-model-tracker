@@ -137,16 +137,16 @@
   - [x] Create view for printer performance summary
   - [x] Create view for 10 most recent 3d prints
   - [x] Create view for Tag usage summary (how many models use the tag, etc)
-  - [ ] Create view for model performance summary
+  - [x] Create view for model performance summary
   - [ ] Create view for Material usage summary
 
 - #### Create the View Tests
 
-- [x] Tester for vw_PrinterPerformanceSummary
-- [x] Tester for vw_Recent3DPrints
-- [x] Tester for vw_TagUsageSummary
-- [ ] Tester for vw_ModelPerformanceSummary
-- [ ] Tester for vw_MaterialUsageSummary
+  - [x] Tester for vw_PrinterPerformanceSummary
+  - [x] Tester for vw_Recent3DPrints
+  - [x] Tester for vw_TagUsageSummary
+  - [x] Tester for vw_ModelPerformanceSummary
+  - [ ] Tester for vw_MaterialUsageSummary
 
 - #### Additional Features To Add
 - [ ] Implement licensing filter logic
