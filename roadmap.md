@@ -130,7 +130,7 @@
   - [x] Add pagination and filtering to ModelDetails newly enhanced feature, including mocking a lot more data to test for filter purposes
   - [x] Create a test script for the newly enhanced feature, including mocking a lot more data to test for filter purposes
 
-### [ ] Create additional views (e.g. print stats, tag filters)
+### [x] Create additional views (e.g. print stats, tag filters)
 
 - #### Create the Views
 
@@ -138,7 +138,7 @@
   - [x] Create view for 10 most recent 3d prints
   - [x] Create view for Tag usage summary (how many models use the tag, etc)
   - [x] Create view for model performance summary
-  - [ ] Create view for Material usage summary
+  - [x] Create view for Material usage summary
 
 - #### Create the View Tests
 
@@ -146,12 +146,19 @@
   - [x] Tester for vw_Recent3DPrints
   - [x] Tester for vw_TagUsageSummary
   - [x] Tester for vw_ModelPerformanceSummary
-  - [ ] Tester for vw_MaterialUsageSummary
+  - [x] Tester for vw_MaterialUsageSummary
+
+### [ ] Implement licensing filter logic
+
+- #### Create the License Filter and Test
+
+  - [x] Add in license filter logic to GetModels, using LIKE operator and wildcards
+  - [ ] Add in a test for license filter logic into TestGetModels
 
 - #### Additional Features To Add
-- [ ] Implement licensing filter logic
-- [ ] Add indexing strategy and performance checks
-- [ ] Fill out testing suites
+
+  - [ ] Add indexing strategy and performance checks
+  - [ ] Fill out testing suites
 
 ## Stretch Goals
 

@@ -16,6 +16,7 @@
 -- =============================================
 CREATE OR ALTER PROCEDURE dbo.GetModels
     -- Optional parameters
+    @LicenseFilter NVARCHAR(100) = NULL,
     @SortBy NVARCHAR(100) = 'ModelName',
     @SortDirection NVARCHAR(4) = 'ASC',
     @PageNumber INT = 1,
@@ -56,6 +57,9 @@ BEGIN
             ModelDescription
         FROM
             dbo.Models
+        WHERE
+            -- Add a license filter condition using LIKE for a "constains" search
+            (@LicenseFilter_Param IS NULL OR LicenseType LIKE N''%'' + @LicenseFilter_Param + N''%'')
         ORDER BY ' + @OrderByString + 
         N' OFFSET (@PageNumber_Param - 1) * @PageSize_Param ROWS
         FETCH NEXT @PageSize_Param ROWS ONLY;';
@@ -65,7 +69,8 @@ BEGIN
 -- ===================================================================
     EXEC sp_executesql
         @SQL,
-        N'@PageNumber_Param INT, @PageSize_Param INT',
+        N'@LicenseFilter_Param NVARCHAR(100), @PageNumber_Param INT, @PageSize_Param INT',
+        @LicenseFilter_Param = LicenseFilter,
         @PageNumber_Param = @PageNumber,
         @PageSize_Param = @PageSize;
 
