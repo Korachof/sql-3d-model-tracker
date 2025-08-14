@@ -70,7 +70,7 @@ BEGIN
     EXEC sp_executesql
         @SQL,
         N'@LicenseFilter_Param NVARCHAR(100), @PageNumber_Param INT, @PageSize_Param INT',
-        @LicenseFilter_Param = LicenseFilter,
+        @LicenseFilter_Param = @LicenseFilter,
         @PageNumber_Param = @PageNumber,
         @PageSize_Param = @PageSize;
 
