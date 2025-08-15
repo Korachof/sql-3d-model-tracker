@@ -148,12 +148,16 @@
   - [x] Tester for vw_ModelPerformanceSummary
   - [x] Tester for vw_MaterialUsageSummary
 
-### [ ] Implement licensing filter logic
+### [x] Implement licensing filter logic
 
 - #### Create the License Filter and Test
 
   - [x] Add in license filter logic to GetModels, using LIKE operator and wildcards
-  - [ ] Add in a test for license filter logic into TestGetModels
+  - [x] Add in a test for license filter logic into TestGetModels
+
+### [x] Make CreateTables Idempotent to avoid errors when re-executing the script
+
+### [x] Create ResetDemoData.sql to allow the eventual client-side portfolio applicaton to easily reset test data.
 
 - #### Additional Features To Add
 
