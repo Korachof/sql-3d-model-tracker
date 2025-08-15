@@ -11,7 +11,7 @@ REM =======================================================
 ECHO Building the deployment script...
 
 REM Define the output file name
-SET DEPLOY_SCRIPT=Deploy.sql
+SET DEPLOY_SCRIPT=Deploy-Prod.sql
 
 REM Wipe the old deployment script if it exists
 IF EXIST %DEPLOY_SCRIPT% DEL %DEPLOY_SCRIPT%
@@ -32,13 +32,6 @@ FOR %%f IN (.\procedures\*.sql) DO (
 
 ECHO -- Creating views... >> %DEPLOY_SCRIPT%
 FOR %%f IN (.\views\*.sql) DO (
-    type "%%f" >> %DEPLOY_SCRIPT%
-    ECHO. >> %DEPLOY_SCRIPT%
-    ECHO GO >> %DEPLOY_SCRIPT%
-)
-
-ECHO -- Creating utility scripts... >> %DEPLOY_SCRIPT%
-FOR %%f IN (.\scripts\*.sql) DO (
     type "%%f" >> %DEPLOY_SCRIPT%
     ECHO. >> %DEPLOY_SCRIPT%
     ECHO GO >> %DEPLOY_SCRIPT%
