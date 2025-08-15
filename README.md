@@ -78,7 +78,7 @@ The primary way to interact with the database is through the following stored pr
 
 **dbo.GetTagsForModel**: Retrieves a paginated list of all tags assigned to a specific model.
 
-### Update (edit) Procedures
+### Update (Edit) Procedures
 
 **dbo.UpdateModel**: Updates the details for an existing model.
 
@@ -116,9 +116,79 @@ entries are removed automatically by the ON DELETE CASCADE constraint.
 
 ## Testing and Database Management Scripts
 
-### Test Scripts
+### Add Test Scripts
+
+**TestAddModel**: Tests AddModel by deleting the table data, and then creating model testing data. Tests for verification, as well as NULL and NOT NULL data.
+
+**TestAddPrinter**: Tests AddPrinter by deleting the table data, and then creating printer testing data. Tests for verification, as well as NULL and NOT NULL data.
+
+**TestAddTag**: Tests AddTag by deleting the table data, and then creating tag testing data. Tests for verification, as well as NULL and NOT NULL data.
+
+**TestAssignTagToModel**: Tests AssignTagToModel by deleting the table data, and then creating model and tag testing data before assigning tags to models for testing. Tests for verification, as well as NULL and NOT NULL data.
+
+**TestRecordModelPrint**: Tests RecordModelPrint by deleting the table data, and then creating model and printing testing data before creating test print log entries. Tests for verification, as well as NULL and NOT NULL data.
+
+### Get (Read) Test Scripts
+
+**TestGetModels**: Tests GetModels by deleting the table data, and then creating model testing data. Tests for verification, filtering, sorting, and pagination.
+
+**TestGetPrinters**: Tests GetPrinters by deleting the table data, and then creating printers testing data. Tests for verification, filtering, sorting, and pagination.
+
+**TestGetTags**: Tests GetTags by deleting the table data, and then creating tag testing data. Tests for verification, filtering, sorting, and pagination.
+
+**TestGetPrintLogs**: Tests GetPrintLogs by deleting the table data, and then creating model and printing testing data before creating print log entries for testing. Tests for filtering, sorting, and pagination.
+
+**TestGetModelDetails**: Tests GetModelDetails by deleting the table data, and then creating model, printer, and tag testing data before using AssignTagToModel and AddPrintLog to create relationships. Tests for filtering, sorting, and pagination for all three created tables.
+
+**TestGetPrintLogsForModel**: Tests GetPrintLogsForModel by deleting the table data, and then creating model and printer testing data before creating print log entries for testing. Tests for filtering, sorting, and pagination.
+
+**TestGetPrintLogsForPrinter**: Tests GetPrintLogsForPrinter by deleting the table data, and then creating model and printer testing data before creating print log entries for testing. Tests for filtering, sorting, and pagination.
+
+**TestGetModelsByTag**: Tests GetModelsByTag by deleting the table data, and then creating model and tag testing data before using AssignTagToModel to create a tag/model relationship for testing. Tests for filtering, sorting, and pagination.
+
+**TestGetTagsForModel**: Tests GetTagsForModel by deleting the table data, and then creating model and tag testing data before using AssignTagToModel to create a tag/model relationship for testing. Tests for filtering, sorting, and pagination.
+
+### Update (Edit) Test Scripts
+
+**TestUpdateModel**: Tests UpdateModel by deleting the table data, and then creating model testing data. Tests for verification and NULL and NOT NULL data.
+
+**TestUpdatePrinter**: Tests UpdatePrinter by deleting the table data, and then creating printer testing data. Tests for verification and NULL and NOT NULL data.
+
+**TestUpdatePrintLog**: Tests UpdatePrintLog by deleting the table data, and then creating model and printer testing data before using RecordModelPrint to create print log entries for testing. Tests for verification and NULL and NOT NULL data.
+
+**TestUpdateTag**: Tests UpdateTag by deleting the table data, and then creating model and tag testing data. Tests for verification and NULL and NOT NULL data.
+
+### Delete Test Scripts
+
+**TestDeleteModel**: Tests DeleteModel by deleting the table data, and then creating model, printer, and tag testing data. Uses AssignTagToModel and RecordModelPrint to test that child tables also get removed when a model is removed.
+
+**TestDeletePrinter**: Tests DeletePrinter by deleting the table data, and then creating model and printer testing data. Uses RecordModelPrint to test that child tables also get removed when a printer is removed.
+
+**TestDeleteTag**: Tests DeleteTag by deleting the table data, and then creating model and tag testing data. Uses AssignTagToModel to test that child tables also get removed when a tag is removed.
+
+**TestDeletePrintLog**: Tests DeletePrintLog by deleting the table data, and then creating model and printer testing data. Uses RecordModelPrint to test that the print log entry is removed successfully.
+
+**TestRemoveTagFromModel**: Tests RemoveTagFromModel by deleting the table data, and then creating model and tag testing data. Uses AssignTagToModel to test that the child table is removed successfully.
+
+### View Test Scripts
+
+**TestViewMaterialUsageSummary**: Tests vw_MaterialUsageSummary by deleting the table data, and then creating model and printer testing data before using RecordModelPrint to create testing print logs. Tests that the material data is accurately shown in the table.
+
+**TestViewModelPrintSummary**: Tests vw_ViewModelPrintSummary by deleting the table data, and then creating model and printer testing data before using RecordModelPrint to create testing print logs. Tests that the model print data is accurately shown in the table.
+
+**TestViewPrinterPerformanceSummary**: Tests vw_PrinterPerformanceSummary by deleting the table data, and then creating model and printer testing data before using RecordModelPrint to create testing print logs. Tests that the printer success and fail data is accurately shown in the table.
+
+**TestViewRecent3DPrints**: Tests vw_Recent3DPrints by deleting the table data, and then creating model and printer testing data before using RecordModelPrint to create testing print logs. Tests that the last 10 prints are accurately shown in the table.
+
+**TestViewTagUsageSummary**: Tests vw_TagUsageSummary by deleting the table data, and then creating model and tag testing data before using AssignTagToModel to create testing data. Tests that the tag usage data is accurately shown in the table.
 
 ### Optional Scripts
+
+**ResetDemoData**: Wipes all data from the database and seeds it with a curated set of sample data for demonstration purposes. _Used for resetting a demo client-side application_
+
+**ResetTables**: Wipes all data from the database tables. _Used in the event where all data needs to be wiped from the tables while maintaining the table structure_
+
+**ResetDatabase**: Wipes all data from the database and recreates the database without the tables. _Only used in the event that the database needs to be wiped without re-creating the tables_
 
 ## Setup & Installation
 

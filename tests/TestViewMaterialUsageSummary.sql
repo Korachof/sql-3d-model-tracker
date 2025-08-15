@@ -18,7 +18,7 @@ DECLARE @PrintID INT;
 DECLARE @ReturnStatus INT;
 
 -- Insert a sample model and printer
-PRINT '--- Inserting initial test data... ---';
+-- Inserting initial test data... 
 EXEC dbo.AddModel @ModelName = N'Test Model', @SourceURL = N'http://a.com', @ModelID = @ModelID OUTPUT;
 EXEC dbo.AddPrinter @PrinterBrand = N'TestBrand', @PrinterModelName = N'TestModel', @PrinterMaterialType = N'Filament', @PrinterID = @PrinterID OUTPUT;
 
@@ -35,8 +35,7 @@ EXEC dbo.RecordModelPrint @ModelID=@ModelID, @PrinterID=@PrinterID, @PrintStartD
 
 EXEC dbo.RecordModelPrint @ModelID=@ModelID, @PrinterID=@PrinterID, @PrintStartDateTime='2025-08-06', @PrintEndDateTime='2025-08-06 01:00', @MaterialUsed=N'ABS', @PrintStatus=N'Failed', @PrintID=@PrintID OUTPUT;
 
----
-PRINT '--- QUERYING THE dbo.vw_MaterialUsageSummary VIEW ---';
+-- QUERYING THE dbo.vw_MaterialUsageSummary VIEW
 -- Expected: Three rows, one for each material, with correctly calculated stats.
 SELECT * FROM dbo.vw_MaterialUsageSummary ORDER BY TotalPrints DESC;
 GO
