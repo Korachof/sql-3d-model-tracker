@@ -222,7 +222,7 @@ Connect to your server using a tool like SQL Server Management Studio (SSMS). Fo
 
 After you've installed SQL Server and your environment, go through the steps to creating a new database, and connect. Your initial connection should be to the master database.
 
-Open the generated deployment script (Deploy-Demo.sql or Deploy-Prod.sql). In SSMS, go to File -> Open -> File -> find the sql-3d-model-tracker folder in your computer -> deployment script (either Deploy-Demo.sql or Deploy-Prod.sql, depending on your use-case).
+Open the generated deployment script (Deploy-Demo.sql or Deploy-Prod.sql). In SSMS, go to File -> Open -> File... -> find the sql-3d-model-tracker folder in your computer -> deployment script (either Deploy-Demo.sql or Deploy-Prod.sql, depending on your use-case).
 
 Execute the entire script. Click the "Execute" button with the green arrow.
 
