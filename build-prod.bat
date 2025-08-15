@@ -1,9 +1,9 @@
 @echo off
 REM =======================================================
-REM  Build Script for the 3D Model Print Tracker Database
+REM  Build Production-Level Script for the 3D Model Print Tracker Database
 REM =======================================================
 REM  This script reads all the individual .sql source files
-REM  and concatenates them into a single Deploy.sql file.
+REM  and concatenates them into a single Deploy-Prod.sql file.
 REM
 REM  Usage: Double-click this file in File Explorer to run it.
 REM =======================================================
