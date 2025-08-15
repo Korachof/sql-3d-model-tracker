@@ -184,20 +184,46 @@ entries are removed automatically by the ON DELETE CASCADE constraint.
 
 ### Optional Scripts
 
-**ResetDemoData**: Wipes all data from the database and seeds it with a curated set of sample data for demonstration purposes. _Used for resetting a demo client-side application_
+**ResetDemoData**: Wipes all data from the database and seeds it with a curated set of sample data for demonstration purposes. _Only used in the Demo version for resetting a demo client-side application_
 
-**ResetTables**: Wipes all data from the database tables. _Used in the event where all data needs to be wiped from the tables while maintaining the table structure_
+**ResetTables**: Wipes all data from the database tables. _Only used by developers in the event where all data needs to be wiped from the tables while maintaining the table structure_
 
-**ResetDatabase**: Wipes all data from the database and recreates the database without the tables. _Only used in the event that the database needs to be wiped without re-creating the tables_
+**ResetDatabase**: Wipes all data from the database and recreates the database without the tables. _Only used by Developers in the event that the database needs to be wiped without re-creating the tables_
 
 ## Setup & Installation
 
-To create and set up the database, follow these steps:
+### 1. Build the Deployment Script
 
-Ensure you have an instance of SQL Server (2012 or newer) running.
+First, download the project file and all of its contents from GitHub [here](https://github.com/Korachof/sql-3d-model-tracker). Click on Code (green button), and Download Zip.
 
-Connect to the server using a tool like SQL Server Management Studio (SSMS).
+Unzip all files in the place of your choosing.
 
-Execute the CreateTables.sql script. This will create the ThreeDModelsTrackerDB database with the correct collation and build all necessary tables.
+Next, you need to generate the deployment script. Choose the appropriate build script for your target environment:
 
-Execute all of the individual stored procedure and view files from the procedures/ and views/ folders.
+#### For a Demo Environment (includes ResetDemoData procedure):
+
+In Windows File Explorer, double-click the build-demo.bat file located in the project's root directory.
+
+This will generate a new file named Deploy-Demo.sql.
+
+#### For a Production Environment (secure, no reset procedure):
+
+In Windows File Explorer, double-click the build-prod.bat file.
+
+This will generate a new file named Deploy-Prod.sql.
+
+### 2. Execute the Deployment Script
+
+Once the deployment script has been generated, you can run it to create the database.
+
+Ensure you have an instance of SQL Server (2012 or newer) running. You can find instructions for installing the newest version [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+
+Connect to your server using a tool like SQL Server Management Studio (SSMS). For SSMS, you can find instructions on downloading the latest version [here](https://learn.microsoft.com/en-us/ssms/install/install)
+
+After you've installed SQL Server and your environment, go through the steps to creating a new database, and connect. Your initial connection should be to the master database.
+
+Open the generated deployment script (Deploy-Demo.sql or Deploy-Prod.sql). In SSMS, go to File -> Open -> File -> find the sql-3d-model-tracker folder in your computer -> deployment script (either Deploy-Demo.sql or Deploy-Prod.sql, depending on your use-case).
+
+Execute the entire script. Click the "Execute" button with the green arrow.
+
+This single step will create the ThreeDModelsTrackerDB database with the correct collation, build all necessary tables, and create all the views and stored procedures.
