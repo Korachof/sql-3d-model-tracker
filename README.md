@@ -214,7 +214,7 @@ This will generate a new file named Deploy-Prod.sql, also located in the root di
 
 ### 2. Execute the Deployment Script
 
-Once the deployment script has been generated, you can run it to create the database.
+Once the deployment script has been generated, you can run it to create the database:
 
 Ensure you have an instance of SQL Server (2012 or newer) running. You can find instructions for installing the newest version [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
