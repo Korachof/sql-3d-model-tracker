@@ -204,21 +204,21 @@ Next, you need to generate the deployment script. Choose the appropriate build s
 
 In Windows File Explorer, double-click the build-demo.bat file located in the project's root directory.
 
-This will generate a new file named Deploy-Demo.sql.
+This will generate a new file named Deploy-Demo.sql, also located in the root directory.
 
 #### For a Production Environment (secure, no reset procedure):
 
-In Windows File Explorer, double-click the build-prod.bat file.
+In Windows File Explorer, double-click the build-prod.bat file located in the project's root directory.
 
-This will generate a new file named Deploy-Prod.sql.
+This will generate a new file named Deploy-Prod.sql, also located in the root directory.
 
 ### 2. Execute the Deployment Script
 
 Once the deployment script has been generated, you can run it to create the database.
 
-Ensure you have an instance of SQL Server (2012 or newer) running. You can find instructions for installing the newest version [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+Ensure you have an instance of SQL Server (2012 or newer) running. You can find instructions for installing the newest version [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
 
-Connect to your server using a tool like SQL Server Management Studio (SSMS). For SSMS, you can find instructions on downloading the latest version [here](https://learn.microsoft.com/en-us/ssms/install/install)
+Connect to your server using a tool like SQL Server Management Studio (SSMS). For SSMS, you can find instructions on downloading the latest version [here](https://learn.microsoft.com/en-us/ssms/install/install).
 
 After you've installed SQL Server and your environment, go through the steps to creating a new database, and connect. Your initial connection should be to the master database.
 
