@@ -159,16 +159,8 @@
 
 ### [x] Create ResetDemoData.sql to allow the eventual client-side portfolio applicaton to easily reset test data.
 
-- #### Additional Features To Add
+- #### Stretch Goals
 
   - [ ] Add indexing strategy and performance checks
+  - [ ] Track user or print location metadata
   - [ ] Fill out testing suites
-
-## Stretch Goals
-
-- [ ] Track user or print location metadata
-- [ ] Build lightweight UI or admin dashboard
-- [ ] Build Thingiverse importer logic
-- [ ] Export recent prints to JSON or CSV
-- [ ] Hook in other sources (e.g. Printables, Cults3D)
-- [ ] Integrate thumbnail imports for a visually rich UI
